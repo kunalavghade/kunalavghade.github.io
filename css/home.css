@@ -1,0 +1,145 @@
+#home{
+  background-color: #121212; /*#121212*/
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding: 0rem 10rem;
+  min-height: 115vh;
+}
+
+#div-left h1 {
+  font-size: 3.5rem;
+  color: #0099f8;
+  white-space: nowrap;
+  margin-bottom: 30px;
+}
+
+#div-left p {
+  font-size: 1.5rem;
+}
+#div-right {
+  width: auto;
+}
+
+/*Estilo Neon links social - INICIO*/
+#div-social {
+  justify-content: center;
+  white-space: nowrap;
+}
+#div-social img {
+  margin-right: 10px;
+}
+#div-social a {
+  margin-top: 3rem;
+  margin-right: 2.4rem;
+  position: relative;
+  display: inline-block;
+  padding: 15px 20px;
+  color: #2196f3;
+  text-transform: uppercase;
+  letter-spacing: 4px;
+  text-decoration: none;
+  border: 1px solid #0099f86b;
+  border-radius: 10px;
+  overflow: hidden;
+  transition: 0.2s;
+}
+#div-social a:hover {
+  color: #ffffff;
+  background: #2196f3;
+  box-shadow: 0 0 5px #2196f3, 0 0 25px #2196f3, 0 0 45px #2196f3;
+  transition-delay: 1s;
+}
+#div-social a span {
+  position: absolute;
+  display: block;
+}
+#div-social a span:nth-child(2) {
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, #2196f3);
+}
+#div-social a:hover span:nth-child(2) {
+  left: 100%;
+  transition: 1s;
+}
+#div-social a span:nth-child(4) {
+  bottom: 0;
+  right: -100%;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(270deg, transparent, #2196f3);
+}
+#div-social a:hover span:nth-child(4) {
+  right: 100%;
+  transition: 1s;
+  transition-delay: 0.5s;
+}
+#div-social a span:nth-child(3) {
+  top: -100%;
+  right: 0;
+  width: 2px;
+  height: 100%;
+  background: linear-gradient(180deg, transparent, #2196f3);
+}
+#div-social a:hover span:nth-child(3) {
+  top: 100%;
+  transition: 1s;
+  transition-delay: 0.25s;
+}
+#div-social a span:nth-child(5) {
+  bottom: -100%;
+  left: 0;
+  width: 2px;
+  height: 100%;
+  background: linear-gradient(360deg, transparent, #2196f3);
+}
+#div-social a:hover span:nth-child(5) {
+  bottom: 100%;
+  transition: 1s;
+  transition-delay: 0.75s;
+}
+/*Estilo Neon links social - FIM*/
+
+#img-gif /*Astronault*/ {
+  width: 27rem;
+}
+
+@media (max-width: 1326px) {
+  #home {
+    padding: 0;
+  }
+}
+
+@media (max-width: 879px) {
+  #home {
+    text-align: center;
+    justify-content: center;
+    position: sticky;
+    padding: 0;
+  }
+    /*Imagem*/
+  #img-gif {
+    display: none;
+  }
+}
+
+
+@media (max-width: 500px) {
+  #home {
+    margin: 0;
+    padding: 0;
+    min-height: 75vh;
+  }
+  #home h1 {
+    font-size: 3rem;
+  }
+
+  #home p {
+    font-size: 1rem;
+  }
+  
+}
+

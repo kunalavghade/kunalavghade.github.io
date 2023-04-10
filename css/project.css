@@ -1,0 +1,83 @@
+#projects {
+  background: #151515;
+  padding: 8rem 0;
+}
+
+#title-project {
+  font-size: 2.5rem;
+  margin-left: 10.6rem;
+  margin-bottom: 3rem;
+}
+
+#project-div {
+  display: grid;
+  text-align: center;
+  grid-template-columns: 500px 500px;
+  grid-row-gap: 3em;
+  justify-content: center;
+}
+
+#project-div a {
+  text-decoration: none;
+  text-align: center;
+}
+.project {
+  border-radius: 5px;
+  width: 25rem;
+  padding: 1.5rem;
+  transition: 1s all ease;
+  border: 1px solid #121212;
+  background-color: #121212;
+  visibility: visible;
+  opacity: 1;
+  transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);
+  transition: all 1s ease 0s, opacity 2s cubic-bezier(0.5, 0, 0, 1) 0s,
+    transform 2s cubic-bezier(0.5, 0, 0, 1) 0s;
+}
+
+.project,
+#project-div a {
+  margin: auto;
+}
+
+.project:hover {
+  border: 1px solid #0099f8;
+}
+
+#tec-used p {
+  line-height: 3rem;
+}
+
+.image-project {
+  width: 100%;
+}
+
+.view-project {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  justify-content: center;
+}
+
+@media (max-width: 984px) {
+  #title-project {
+    text-align: center;
+    margin: auto;
+    margin-bottom: 3rem;
+  }
+  #project-div {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 500px) {
+    #projects {
+    padding: 3rem 0;
+  }
+
+  .project {
+    width: 17rem;
+    padding: 1.5rem;
+    border: 1px solid #0099f8a1;
+  }
+}
