@@ -62,7 +62,8 @@
         <div id="div-left">
           <p>Hi, I'm</p>
           <h1>Kunal Avghade</h1>
-          <p>I am Student and Coder</p>
+          <p>I am <span class="ityped"></span></p>
+          <script src="https://unpkg.com/ityped@0.0.10"></script>
           <div id="div-social">
             <a
               href="https://www.linkedin.com/in/kunalavghade/"
@@ -99,7 +100,7 @@
           <h1>Kunal Avghade</h1>
           <p>B.Tech Electronics and Telecomunication Enggineeing</p>
           <p>
-            I am student, IT entusiasticand and also a compatitive programmer. I like's to learn new techonologies and build cool project. currantly I am on track to begin my carrier and upgrading and aquire new skills.
+            I am student, IT entusiastic and also a compatitive programmer. I like's to learn new techonologies and build cool project. currantly I am on track to begin my carrier and upgrading and aquire new skills.
           </p>
           <div id="about-button">
             <div class="buttons">
@@ -348,4 +349,10 @@
   <script src="js/menu-mobile.js"></script>
   <script src="js/menu-education.js"></script>
   <script src="js/fadeInSection.js"></script>
+  <script>
+      window.ityped.init(document.querySelector('.ityped'),{
+                strings: ['Student','Programmer','Developer','Fast Learner'],
+                loop: true
+            })
+  </script>
 </html>
