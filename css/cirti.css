@@ -42,3 +42,11 @@
     width: 40%;
   }
 }
+
+
+@media (max-width: 500px) {
+  .certificate{
+    background: #151515;
+    padding: 8rem 1rem;
+  }
+}
