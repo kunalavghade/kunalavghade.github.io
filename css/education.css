@@ -1,11 +1,14 @@
 #education {
-  background: #121212;
+  background: var(--bg-color);
   padding: 8rem 5rem;
 }
 
 #education h2 {
   font-size: 2.5rem;
   margin-left: 5.5rem;
+  color: var(--neon-cyan);
+  text-shadow: 0 0 5px var(--neon-cyan);
+  font-family: 'Orbitron', sans-serif;
 }
 
 #education-div {
@@ -18,7 +21,8 @@
 #education-left {
   width: 15rem;
   height: 100%;
-  border-left: 3px solid #0099f888;
+  border-left: 3px solid var(--neon-cyan);
+  box-shadow: -2px 0 10px rgba(0, 243, 255, 0.2);
 }
 
 #education-left ul {
@@ -30,15 +34,21 @@
   padding-left: 10px;
   width: 100%;
   cursor: pointer;
+  color: var(--text-color);
+  transition: 0.3s;
 }
 
 #education-left li:hover {
-  background: #2c2c2c;
-  transition: 0.6s;
+  background: rgba(0, 243, 255, 0.1);
+  color: var(--neon-cyan);
+  text-shadow: 0 0 5px var(--neon-cyan);
+  padding-left: 20px;
 }
 
 .education-click {
-  background: #2c2c2c;
+  background: rgba(0, 243, 255, 0.1);
+  color: var(--neon-cyan) !important;
+  border-right: 3px solid var(--neon-cyan);
 }
 
 #education-right {
@@ -48,10 +58,12 @@
 
 #education-right h3 {
   font-size: 1.5rem;
+  color: var(--neon-pink);
+  text-shadow: 0 0 5px var(--neon-pink);
 }
 
 #education-right h4 {
-  color: #0099f8;
+  color: var(--neon-cyan);
   margin: 2rem 0;
 }
 
@@ -74,18 +86,21 @@
     filter: blur(12px);
     opacity: 0;
   }
+
   100% {
     -webkit-filter: blur(0px);
     filter: blur(0px);
     opacity: 1;
   }
 }
+
 @keyframes text-focus-in {
   0% {
     -webkit-filter: blur(12px);
     filter: blur(12px);
     opacity: 0;
   }
+
   100% {
     -webkit-filter: blur(0px);
     filter: blur(0px);
@@ -106,14 +121,17 @@
   #education-div {
     display: block;
   }
+
   #education-left {
     margin: auto;
     border-left: none;
     margin-bottom: 4rem;
   }
+
   .education-click {
-    border-bottom: 1px solid #0099f8;
-    background: #2c2c2c;
+    border-bottom: 1px solid var(--neon-cyan);
+    border-right: none;
+    background: rgba(0, 243, 255, 0.1);
   }
 
   #education-right {
