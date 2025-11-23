@@ -1,4 +1,4 @@
-.certificate{
+.certificate {
   background: #151515;
   padding: 8rem 5rem;
 }
@@ -18,16 +18,19 @@
 }
 
 
-.certificate .continer img{
+.certificate .continer img {
   margin-top: 8px;
   width: 22%;
   vertical-align: middle;
   padding: 1rem;
   border-radius: 1rem;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-.certificate .continer  img:hover{
+.certificate .continer img:hover {
   box-shadow: 0 0 5px #2196f3, 0 0 25px #2196f3, 0 0 45px #2196f3;
+  transform: scale(1.1);
+  z-index: 10;
 }
 
 @media (max-width: 1080px) {
@@ -38,14 +41,14 @@
     margin-bottom: 0;
   }
 
-  .certificate .continer img{
+  .certificate .continer img {
     width: 40%;
   }
 }
 
 
 @media (max-width: 500px) {
-  .certificate{
+  .certificate {
     background: #151515;
     padding: 8rem 1rem;
   }

@@ -1,36 +1,61 @@
 #about {
-  background: #151515;
+  background: var(--card-bg);
   padding: 8rem 0;
   display: flex;
   justify-content: space-around;
+  border-top: 1px solid var(--border-color);
+  border-bottom: 1px solid var(--border-color);
+  position: relative;
+}
+
+#about::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(45deg, transparent 49%, var(--neon-cyan) 49%, var(--neon-cyan) 51%, transparent 51%);
+  background-size: 10px 10px;
+  opacity: 0.05;
+  pointer-events: none;
 }
 
 #about-photo img {
   border-radius: 50%;
   height: 21rem;
   width: 18rem;
+  border: 2px solid var(--neon-cyan);
+  box-shadow: 0 0 15px var(--neon-cyan);
 }
 
 #about-text {
   display: block;
   width: 35rem;
+  z-index: 2;
 }
 
 #about-text h1 {
   margin-bottom: 30px;
   font-size: 2.4rem;
+  color: var(--neon-pink);
+  text-shadow: 0 0 5px var(--neon-pink);
+  font-family: 'Orbitron', sans-serif;
 }
 
 #about-text p {
-  font-family: sans-serif;
-  letter-spacing: 2px;
+  font-family: 'Noto Sans JP', sans-serif;
+  letter-spacing: 1px;
   line-height: 28px;
   margin-bottom: 30px;
+  color: var(--text-color);
 }
 
 #email-photo {
   width: 45px;
+  filter: drop-shadow(0 0 2px var(--neon-cyan));
 }
+
 #about-button {
   display: flex;
   gap: 30px;
@@ -39,15 +64,21 @@
 .buttons {
   display: flex;
   gap: 15px;
-  border: 2px solid #0099f888;
-  border-radius: 10px;
+  border: 1px solid var(--neon-cyan);
+  border-radius: 5px;
   width: 9.5rem;
+  background: rgba(0, 243, 255, 0.05);
+  transition: 0.3s;
 }
 
 .buttons:hover {
-  border: 2px solid #0099f8;
-  -webkit-box-shadow: 1px 0px 16px -2px #0099f8;
-  box-shadow: 1px 0px 16px -2px #0099f8;
+  border: 1px solid var(--neon-cyan);
+  background: var(--neon-cyan);
+  box-shadow: 0 0 15px var(--neon-cyan);
+}
+
+.buttons:hover a {
+  color: #000;
 }
 
 #about-button a {
@@ -56,6 +87,9 @@
   align-items: center;
   padding: 15px;
   text-decoration: none;
+  color: var(--neon-cyan);
+  font-weight: bold;
+  transition: 0.3s;
 }
 
 
@@ -64,6 +98,7 @@
     flex-direction: column;
     align-items: center;
   }
+
   #about-text {
     text-align: center;
     width: 100%;

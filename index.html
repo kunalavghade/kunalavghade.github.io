@@ -1,25 +1,163 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>&lsaquo; Kunal Avghade /&rsaquo;</title>
-	<link rel="stylesheet" href="css/navbar.css" />
-	<link rel="stylesheet" href="css/style.css" />
-	<link rel="stylesheet" href="css/home.css" />
-	<link rel="stylesheet" href="css/about.css" />
-	<link rel="stylesheet" href="css/education.css" />
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>&lsaquo; Kunal Avghade /&rsaquo;</title>
+  <link rel="stylesheet" href="css/navbar.css" />
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/home.css" />
+  <link rel="stylesheet" href="css/about.css" />
+  <link rel="stylesheet" href="css/education.css" />
   <link rel="stylesheet" href="css/project.css" />
   <link rel="stylesheet" href="css/cirti.css" />
-	<link rel="stylesheet" href="css/exp.css" />
+  <link rel="stylesheet" href="css/exp.css" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Noto+Sans+JP:wght@400;700&display=swap"
+    rel="stylesheet">
 
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <style>
+    #canvas-container {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+      opacity: 0.6;
+    }
+
+    /* Skills Section Styles */
+    #skills {
+      padding: 8rem 5rem;
+      background: var(--bg-color);
+    }
+
+    #skills h2 {
+      font-size: 2.5rem;
+      margin-left: 5.5rem;
+      color: var(--neon-cyan);
+      text-shadow: 0 0 5px var(--neon-cyan);
+      font-family: 'Orbitron', sans-serif;
+      margin-bottom: 3rem;
+    }
+
+    .skills-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 2rem;
+    }
+
+    .skill-category {
+      background: var(--card-bg);
+      padding: 2rem;
+      border-radius: 10px;
+      border: 1px solid var(--border-color);
+      width: 300px;
+      transition: 0.3s;
+    }
+
+    .skill-category:hover {
+      border-color: var(--neon-pink);
+      box-shadow: 0 0 15px rgba(255, 0, 255, 0.2);
+    }
+
+    .skill-category h3 {
+      color: var(--neon-pink);
+      margin-bottom: 1rem;
+      text-align: center;
+      font-family: 'Orbitron', sans-serif;
+    }
+
+    .skill-list {
+      list-style: none;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      justify-content: center;
+    }
+
+    .skill-item {
+      background: rgba(0, 243, 255, 0.1);
+      color: var(--neon-cyan);
+      padding: 0.5rem 1rem;
+      border-radius: 5px;
+      font-size: 0.9rem;
+      border: 1px solid var(--neon-cyan);
+    }
+
+    /* Achievements & Publications */
+    #achievements,
+    #publications {
+      padding: 4rem 5rem;
+      background: var(--bg-color);
+    }
+
+    #achievements h2,
+    #publications h2 {
+      font-size: 2.5rem;
+      margin-left: 5.5rem;
+      color: var(--neon-cyan);
+      text-shadow: 0 0 5px var(--neon-cyan);
+      font-family: 'Orbitron', sans-serif;
+      margin-bottom: 2rem;
+    }
+
+    .list-item {
+      background: var(--card-bg);
+      padding: 1.5rem;
+      margin-bottom: 1rem;
+      border-radius: 10px;
+      border-left: 3px solid var(--neon-pink);
+      margin-left: 5.5rem;
+      margin-right: 5.5rem;
+    }
+
+    .list-item h3 {
+      color: var(--text-color);
+      margin-bottom: 0.5rem;
+    }
+
+    .list-item p {
+      color: #aaa;
+    }
+
+    @media (max-width: 879px) {
+
+      #skills,
+      #achievements,
+      #publications {
+        padding: 5rem 1.5rem;
+        text-align: center;
+      }
+
+      #skills h2,
+      #achievements h2,
+      #publications h2 {
+        margin-left: 0;
+      }
+
+      .list-item {
+        margin-left: 0;
+        margin-right: 0;
+      }
+    }
+  </style>
 </head>
+
 <body>
-	<header id="header">
-      <p>
-        <a id="logo" href="#home">
-          <code>&lsaquo; Kunal Avghade /&rsaquo; <code>
+  <div id="canvas-container"></div>
+  <header id="header">
+    <p>
+      <a id="logo" href="#home">
+        <code>&lsaquo; Kunal Avghade /&rsaquo; <code>
         </a>
       </p>
       <nav id="nav">
@@ -34,115 +172,334 @@
         </button>
 
         <ul id="menu" role="menu">
-          <li>
-            <a href="#home"><i class="fa fa-home" aria-hidden="true"></i> Home<span></span></a>
-          </li>
-          <li>
-            <a href="#about"><i class="fa fa-user" aria-hidden="true"></i> About<span></span></a>
-          </li>
-          <li>
-            <a href="#education"><i class="fa fa-university" aria-hidden="true"></i> Education<span></span></a>
-          </li>
-          <li>
-            <a href="#experience"><i class="fa fa-briefcase" aria-hidden="true"></i> Experience<span></span></a>
-          </li>
-          <li>
-            <a href="#projects"><i class="fa fa-archive" aria-hidden="true"></i> Projects<span></span></a>
-          </li>
-          <li>
-            <a href="#Certificates"><i class="fa fa-certificate" aria-hidden="true"></i> Certificates<span></span></a>
-          </li>
+          <li><a href="#home"><i class="fa fa-home" aria-hidden="true"></i> Home<span></span></a></li>
+          <li><a href="#about"><i class="fa fa-user" aria-hidden="true"></i> About<span></span></a></li>
+          <li><a href="#experience"><i class="fa fa-briefcase" aria-hidden="true"></i> Experience<span></span></a></li>
+          <li><a href="#skills"><i class="fa fa-code" aria-hidden="true"></i> Skills<span></span></a></li>
+          <li><a href="#projects"><i class="fa fa-archive" aria-hidden="true"></i> Projects<span></span></a></li>
+          <li><a href="#education"><i class="fa fa-university" aria-hidden="true"></i> Education<span></span></a></li>
+          <li><a href="#Certificates"><i class="fa fa-certificate" aria-hidden="true"></i> Certificates<span></span></a></li>
+          <li><a href="#contact"><i class="fa fa-envelope" aria-hidden="true"></i> Contact<span></span></a></li>
         </ul>
         <span id="border-animation"></span>
       </nav>
     </header>
 
    <main>
+      <!-- HOME SECTION -->
       <section id="home">
         <div id="div-left">
           <p>Hi, I'm</p>
           <h1>Kunal Avghade</h1>
-          <p>I am <span class="ityped"></span></p>
-          <script src="https://unpkg.com/ityped@0.0.10"></script>
+          <p>Software Engineer</p>
+          <p style="font-size: 1.2rem; color: var(--neon-pink);">I am <span id="ityped" style="color: var(--neon-cyan);"></span></p>
           <div id="div-social">
-            <a
-              href="https://www.linkedin.com/in/kunalavghade/"
-              target="_blank"
-              rel="noopener noreferrer"
-              ><img src="img/linkedin icon.png" alt="Linkedin" /> Linkedin
-              <span></span>
-              <span></span>
-              <span></span>
-              <span></span>
-            </a>
-            <a
-              href="https://github.com/kunalavghade"
-              target="_blank"
-              rel="noopener noreferrer"
-              ><img src="img/github incon.png" alt="Linkedin" /> GitHub
-              <span></span>
-              <span></span>
-              <span></span>
-              <span></span>
-            </a>
+            <a href="https://www.linkedin.com/in/kunalavghade/" target="_blank" rel="noopener noreferrer"><img src="img/linkedin icon.png" alt="Linkedin" /> Linkedin<span></span><span></span><span></span><span></span></a>
+            <a href="https://github.com/kunalavghade/" target="_blank" rel="noopener noreferrer"><img src="img/github incon.png" alt="GitHub" /> GitHub<span></span><span></span><span></span><span></span></a>
           </div>
         </div>
         <div id="div-right">
-          <img id="img-gif" src="img/astronaulta.gif" alt="Astronalta Gif" />
+          <img id="img-gif" src="img/astronaulta.gif" alt="Astronaut Gif" />
         </div>
       </section>
       
+      <!-- ABOUT SECTION -->
       <section id="about" data-anime="section-scroll">
         <div id="about-photo">
           <img src="img/kunal Image.png" alt="Photo: Kunal" />
         </div>
         <div id="about-text">
-          <h1>Kunal Avghade</h1>
-          <p>B.Tech Electronics and Telecomunication Enggineeing</p>
-          <p>
-            I am student, IT entusiastic and also a compatitive programmer. I like's to learn new techonologies and build cool project. currantly I am on track to begin my carrier while upgrading and aquire new skills.
-          </p>
+          <h1>About Me</h1>
+          <p>Full Stack Software Engineer with 2.5+ years of experience in frontend and backend frameworks, along with exposure to DevOps and AI/ML technologies.</p>
+          <p>Based in Pune, Maharashtra, India.</p>
           <div id="about-button">
             <div class="buttons">
-              <a
-                href="img/RESUME.pdf"
-                download="RESUME"
-                ><img src="img/download.gif" alt="download" /> Resume</a
-              >
+              <a href="img/RESUME.pdf" download="RESUME"><img src="img/download.gif" alt="download" /> Resume</a>
             </div>
             <div class="buttons">
-              <a href="mailto:kunalavghade77@gmail.com">
-                <img id="email-photo" src="img/email.gif" alt="Email" />Email</a
-              >
+              <a href="mailto:kunalavghade77@gmail.com"><img id="email-photo" src="img/email.gif" alt="Email" />Email</a>
             </div>
           </div>
         </div>
       </section>
-      
+
+      <!-- EXPERIENCE SECTION -->
+      <section id="experience" data-anime="section-scroll">
+        <h2>Experience</h2>
+        <div id="experience-div">
+          <div id="experience-left">
+            <ul>
+              <li class="experience-click" onclick="showExperience('calfus')">Calfus .Inc</li>
+              <li onclick="showExperience('infi')">InfiIoT Tech</li>
+            </ul>
+          </div>
+          <div id="experience-right">
+            <div id="calfus" class="company-active">
+              <h3>Associate Software Engineer</h3>
+              <p>2023/07 - present</p>
+              <h4>Calfus .Inc, Pune, India</h4>
+              <p>Worked across the full-stack domain, handling diverse technologies and delivering high-quality code across multiple projects. Actively participated in daily scrums, sprints, and collaborated on Jira tickets.</p>
+              <br>
+              <p><strong>Key Projects:</strong></p>
+              
+              <div style="margin-top: 1rem;">
+                  <p style="color: var(--neon-cyan); margin-bottom: 0.5rem;"><strong>Netapp Data Migrator</strong></p>
+                  <p style="font-size: 0.9rem; color: #aaa; margin-bottom: 0.5rem;"><em>Tech Stack: Spring Boot, NestJS, NextJS, RabbitMQ, gRPC, REST, Temporal, Redis, PostgreSQL.</em></p>
+                  <ul style="list-style: disc; padding-left: 20px; color: var(--text-color); font-size: 0.95rem;">
+                      <li>Delivered a fully tested solution capable of migrating terabytes of data in hours for NAS storage systems, supporting NFS/SMB protocols.</li>
+                      <li>Designed a server to manage a high load using gRPC and API calls, built storage discovery and migration agents with multithreading and multi-service work distribution.</li>
+                      <li>Built an optimized backend for faster and reliable data transfer, implemented authentication and authorization using Keycloak and Auth0.</li>
+                      <li>Optimized migration and discovery speed throughout the development cycles.</li>
+                  </ul>
+              </div>
+
+              <div style="margin-top: 1.5rem;">
+                  <p style="color: var(--neon-cyan); margin-bottom: 0.5rem;"><strong>Asurint.com</strong></p>
+                  <p style="font-size: 0.9rem; color: #aaa; margin-bottom: 0.5rem;"><em>Tech Stack: Spring Boot, React, NestJS, ArgoCD, GCP, Jenkins, GraphQL, PostgreSQL, Kafka.</em></p>
+                  <ul style="list-style: disc; padding-left: 20px; color: var(--text-color); font-size: 0.95rem;">
+                      <li>Project consisting of Background verification and report generation.</li>
+                      <li>Developed over six epics to support criminal record checks, SSN searches, education verifications, order management, and report generation workflows.</li>
+                      <li>Built microservices enabling seamless data processing and inter-service communication, with multi-vendor Api integrations in the system.</li>
+                      <li>Leveraged GCP for infrastructure, ArgoCD for continuous delivery, and Jenkins for CI/CD automation, ensuring efficient deployment and scalability.</li>
+                  </ul>
+              </div>
+
+              <div style="margin-top: 1.5rem;">
+                  <p style="color: var(--neon-cyan); margin-bottom: 0.5rem;"><strong>Money Viewer</strong></p>
+                  <p style="font-size: 0.9rem; color: #aaa; margin-bottom: 0.5rem;"><em>Tech Stack: Python, FastAPI, React, PostgreSQL, AWS.</em></p>
+                  <ul style="list-style: disc; padding-left: 20px; color: var(--text-color); font-size: 0.95rem;">
+                      <li>Contributed as part of the product development team to create an enterprise solution for visualizing cash flows through graphical representations and Al-driven insights.</li>
+                      <li>Built well-tested and documented APIs and web interfaces to display financial data, efficiently gathering data from files for real-time insights.</li>
+                      <li>Developed a scheduling service to automate weekly data updates in the database, ensuring accuracy and currency of information.</li>
+                  </ul>
+              </div>
+            </div>
+            <div id="infi" class="company-none" style="display: none;">
+              <h3>Python Django Developer Intern</h3>
+              <p>Jan 2023 - Current</p>
+              <h4>InfiIoT Technology Pvt. Ltd.</h4>
+              <p> - Hands Experience on Backend and frontend Technologies.</p>
+              <p> - Responsible Developing, Testing and Integration of Rest APIs into backend, communications with IoT controllers.</p>
+              <p> - Operated on Backend Technologies Django, REST, Database, loggers and HTML, CSS,JS, Ajax as fronted.</p>
+            </div>
+          </div>
+        </div>
+        <script>
+          function showExperience(id) {
+            document.querySelectorAll('#experience-right > div').forEach(div => div.style.display = 'none');
+            document.getElementById(id).style.display = 'block';
+            document.querySelectorAll('#experience-left li').forEach(li => li.classList.remove('experience-click'));
+            event.target.classList.add('experience-click');
+          }
+        </script>
+      </section>
+
+      <!-- SKILLS SECTION (NEW) -->
+      <section id="skills" data-anime="section-scroll">
+          <h2>Skills</h2>
+          <div class="skills-container">
+              <div class="skill-category" data-anime="section-scroll">
+                  <h3>Languages</h3>
+                  <ul class="skill-list">
+                      <li class="skill-item">JavaScript</li>
+                      <li class="skill-item">Java</li>
+                      <li class="skill-item">Python</li>
+                      <li class="skill-item">C++</li>
+                  </ul>
+              </div>
+              <div class="skill-category" data-anime="section-scroll">
+                  <h3>Backend</h3>
+                  <ul class="skill-list">
+                      <li class="skill-item">NestJS</li>
+                      <li class="skill-item">Spring</li>
+                      <li class="skill-item">Spring Boot</li>
+                      <li class="skill-item">FastAPI</li>
+                  </ul>
+              </div>
+              <div class="skill-category" data-anime="section-scroll">
+                  <h3>Frontend</h3>
+                  <ul class="skill-list">
+                      <li class="skill-item">ReactJS</li>
+                      <li class="skill-item">NextJS</li>
+                      <li class="skill-item">HTML</li>
+                      <li class="skill-item">CSS</li>
+                  </ul>
+              </div>
+              <div class="skill-category" data-anime="section-scroll">
+                  <h3>Tools & Platforms</h3>
+                  <ul class="skill-list">
+                      <li class="skill-item">Kafka</li>
+                      <li class="skill-item">RabbitMQ</li>
+                      <li class="skill-item">AWS</li>
+                      <li class="skill-item">GCP</li>
+                      <li class="skill-item">Jenkins</li>
+                      <li class="skill-item">Docker</li>
+                      <li class="skill-item">Temporal</li>
+                  </ul>
+              </div>
+              <div class="skill-category" data-anime="section-scroll">
+                  <h3>Database</h3>
+                  <ul class="skill-list">
+                      <li class="skill-item">PostgreSQL</li>
+                      <li class="skill-item">Redis</li>
+                      <li class="skill-item">MongoDB</li>
+                  </ul>
+              </div>
+          </div>
+      </section>
+
+      <!-- PROJECTS SECTION -->
+      <section class="projects" id="projects" data-anime="section-scroll">
+        <h1 class="heading"> Projects |<span> Repositories</span> </h1>
+        <div class="box-container">
+          
+          <div class="box" data-anime="section-scroll">
+            <div class="container">
+              <img src="img/project/vbirrs.png" alt="VBIRRS" class="image">
+              <div class="overlay">
+                <div class="text"> 
+                <p>
+                    <b>Vision Based Intelligent Recipe Recommendation System</b><br>
+                    Recommends recipes by detecting vegetables in images using YOLO deep learning.<br><br>
+                    <b>Skills:</b> Python | Django | Deep Learning | HTML/CSS
+                </p>
+                <div class="half">
+                  <div class="btn"><a target="_blank" href="https://github.com/kunalavghade/VBIRRS"><i class="fab fa-github"> Visit </i> </a></div>
+                </div>
+              </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="box" data-anime="section-scroll">
+            <div class="container">
+              <img src="img/project/ischolar.png" alt="IScholar" class="image">
+              <div class="overlay">
+                <div class="text"> 
+                <p>
+                    <b>IScholar</b><br>
+                    Scholarship website with application management and desk-wise approval.<br><br>
+                    <b>Skills:</b> Java | Spring Boot | MySQL | HTML/CSS
+                </p>
+                <div class="half">
+                  <div class="btn"><a target="_blank" href="https://github.com/kunalavghade/ischolar"><i class="fab fa-github"> Visit </i> </a></div>
+                </div>
+              </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="box" data-anime="section-scroll">
+            <div class="container">
+              <img src="img/project/sellit.png" alt="SelliT" class="image">
+              <div class="overlay">
+                <div class="text"> 
+                <p>
+                    <b>SelliT</b><br>
+                    E-commerce website with user & Post management, premium activation.<br><br>
+                    <b>Skills:</b> Java | Spring Boot | Thymeleaf | MySQL
+                </p>
+                <div class="half">
+                  <div class="btn"><a target="_blank" href="https://github.com/kunalavghade/SelliT"><i class="fab fa-github"> Visit </i> </a></div>
+                </div>
+              </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="box" data-anime="section-scroll">
+            <div class="container">
+              <img src="img/project/onlineib.png" alt="Online Library" class="image">
+              <div class="overlay">
+                <div class="text"> 
+                <p>
+                    <b>Online Library</b><br>
+                    Share Notes and books amongst students.<br><br>
+                    <b>Skills:</b> Python | Django | SQLite
+                </p>
+                <div class="half">
+                  <div class="btn"><a target="_blank" href="https://github.com/kunalavghade/VBIRRS"><i class="fab fa-github"> Visit </i> </a></div>
+                </div>
+              </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="box" data-anime="section-scroll">
+            <div class="container">
+              <img src="img/project/gms.png" alt="Green House" class="image">
+              <div class="overlay">
+                <div class="text"> 
+                <p>
+                    <b>Green House Monitoring</b><br>
+                    IoT system for collecting data and controlling actuators remotely.<br><br>
+                    <b>Skills:</b> IoT | C/C++ | ESP8266 | Python | Django
+                </p>
+                <div class="half">
+                  <div class="btn"><a target="_blank" href="https://github.com/kunalavghade/Greenhouse_Monitoring_System"><i class="fab fa-github"> Visit </i> </a></div>
+                </div>
+              </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="box" data-anime="section-scroll">
+            <div class="container">
+              <img src="img/project/music.png" alt="Music Player" class="image">
+              <div class="overlay">
+                <div class="text"> 
+                <p>
+                    <b>Music Player</b><br>
+                    Groove Music Player Clone with operational functionality.<br><br>
+                    <b>Skills:</b> Python | Tkinter | Pygame | SQLite
+                </p>
+                <div class="half">
+                  <div class="btn"><a target="_blank" href="https://github.com/kunalavghade/Music-player-by-Python"><i class="fab fa-github"> Visit </i> </a></div>
+                </div>
+              </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="box" data-anime="section-scroll">
+            <div class="container">
+              <img src="img/project/iotbridge.png" alt="IoT Bridge" class="image">
+              <div class="overlay">
+                <div class="text"> 
+                <p>
+                    <b>IoT Bridge Automation</b><br>
+                    IoT solution for river side bridges, data acquisition and control.<br><br>
+                    <b>Skills:</b> C++ | Arduino | ESP8266 | Sensors
+                </p>
+                <div class="half">
+                  <div class="btn"><a target="_blank" href="https://github.com/kunalavghade/IoT_Bridge_Automation"><i class="fab fa-github"> Visit </i> </a></div>
+                </div>
+              </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- EDUCATION SECTION -->
       <section id="education" data-anime="section-scroll">
         <h2>Education</h2>
         <div id="education-div">
           <div id="education-left">
             <ul>
-              <li>Bachelors</li>
-              <li>Diploma</li>
-              <li>SSC</li>
+              <li class="education-click" onclick="showEducation('btech')">Bachelors</li>
+              <li onclick="showEducation('diploma')">Diploma</li>
+              <li onclick="showEducation('ssc')">SSC</li>
             </ul>
           </div>
           <div id="education-right">
-            <div class="collage-none">
+            <div id="btech" class="collage-active">
               <h3>B. Tech, Electronics and Telecommunication</h3>
-              <p>Jan 2020 - Jun 2023 </p>
-              <h4>Vishwakrama Intitute of Information Techology, Pune</h4>
-              <p>Skill Achived</p>
-              <p>- Data structure and Algorithms</p>
-              <p>- Languages: Java, Cpp, Python</p>
-              <p>- Frameworks: Djanog, Spring, Spring boot, React</p>
-              <p>- Cloud: AWS, pythonanyware, heroku</p>
-              <p>- web Dev: HTML, CSS, JS</p>
-              <p>- Database: MySQL</p>
+              <p>2020 - 2023</p>
+              <h4>Vishwakarma Institute of Information Technology, Pune</h4>
             </div>
-            <div class="collage-none">
+            <div id="diploma" class="collage-none" style="display: none;">
               <h3>Diploma, Electronics and Telecommunication</h3>
               <p>Jun 2017 - Jul 2020</p>
               <h4>Government Polytechnic, Pune</h4>
@@ -152,7 +509,7 @@
               <p>- Electronics: Basic, Digital, Power</p>
               <p>- Other: PCB design, Industrial Elctronics</p>
             </div>
-            <div class="collage-none">
+            <div id="ssc" class="collage-none" style="display: none;">
               <h3>Secondary School Certificate</h3>
               <p>March 2017</p>
               <h4>Camp Education High school, Pune</h4>
@@ -160,200 +517,80 @@
               <p>- soft skills</p>
               <p>- Pre-vocational Traning</p>
             </div>
-        </section>
+          </div>
+        </div>
+        <script>
+          function showEducation(id) {
+            document.querySelectorAll('#education-right > div').forEach(div => div.style.display = 'none');
+            document.getElementById(id).style.display = 'block';
+            document.querySelectorAll('#education-left li').forEach(li => li.classList.remove('education-click'));
+            event.target.classList.add('education-click');
+          }
+        </script>
+      </section>
 
-        <section id="experience" data-anime="section-scroll">
-        <h2>Experience</h2>
-        <div id="experience-div">
-          <div id="experience-left">
-            <ul>
-              <li>InfiIoT Technology Pvt. Ltd.</li>
-            </ul>
+      <!-- ACHIEVEMENTS SECTION (NEW) -->
+      <section id="achievements" data-anime="section-scroll">
+          <h2>Achievements</h2>
+          <div class="list-item">
+              <h3>Drive Dynamo (Calfus Inc. Award)</h3>
+              <p>Won Award for Most Dynamic Technology Adaptation and Pushing Boundaries (2023-2025).</p>
           </div>
-          <div id="experience-right">
-            <div class="company-none">
-              <h3>Python Django Developer Intern</h3>
-              <p>Jan 2023 - Current</p>
-              <h4>
-                InfiIoT Technology Pvt. Ltd.
-              </h4>
-              <p> - Hands Experience on Backend and frontend Technologies.
-              </p>
-              <p> - Responsible Developing, Testing and Integration of Rest APIs into backend, communications with IoT controllers.</p>
-              <p> - Operated on Backend Technologies Django, REST, Database, loggers and HTML, CSS,JS, Ajax as fronted.
-              </p>
-            </div>
+          <div class="list-item">
+              <h3>Problem Solving</h3>
+              <p>Solved 1000+ Questions. Top 7% coders in LeetCode (Rank < 13K).</p>
           </div>
+          <div class="list-item">
+              <h3>Hackerrank Certificates</h3>
+              <p>Obtained 6 Badges, Passed 7 Certification Tests.</p>
+          </div>
+      </section>
+
+      <!-- PUBLICATIONS SECTION (NEW) -->
+      <section id="publications" data-anime="section-scroll">
+          <h2>Publications</h2>
+          <div class="list-item">
+              <h3>Vision Based Intelligent Recipe Recommendation System</h3>
+              <p>Eur. Chem. Bull. 2023 (DOI: 10.48047/ecb/2023.12.si4.1124)</p>
+          </div>
+      </section>
+
+      <!-- CERTIFICATES SECTION -->
+      <section class="certificate" id="Certificates">
+        <h3 class="heading">Certificates</h3>
+        <div class="continer">
+              <img src="img/certificates/ibm.jpg" alt="IBM AI Engineering">
+              <img src="img/certificates/ml.jpg" alt="Machine Learning">
+              <img src="img/certificates/edge.jpg" alt="AWS Certified Solutions Architect"> <!-- Assuming this maps to one of the AWS certs -->
+              <img src="img/certificates/python.jpg" alt="AWS Certified Cloud Practitioner"> <!-- Assuming this maps to one of the AWS certs -->
         </div>
       </section>
 
-  <section class="projects" id="projects">
-
-    <h1 class="heading"> Projects |<span> Repositories</span> </h1>
-    
-    <div class="box-container">
-    
-      <div class="box">
-        <div class="container">
-          <img src="img/project/vbirrs.png" alt="Avatar" class="image">
-          <div class="overlay">
-            <div class="text"> 
-            <p>
-                <b>Description : </b>Recommendation system to rocommends recipe by recognizing ingradient present in image and analyzing user previous history.<br><br>
-                <b>Skills : </b> Python | Django | Deep Learing | NoSQL | HTML | CSS | JS | Ajax | Git 
-            </p>
-            <div class="half">
-              <div class="btn"><a target="_blank" href="https://github.com/kunalavghade/VBIRRS"><i class="fab fa-github"> Visit  </i> </a></div>
-              <div class="btn"><a target="_blank" href="https://github.com/kunalavghade/VBIRRS/wiki"><i class="fa fa-paper-plane" aria-hidden="true"> Live </i> </a></div></div>
+      <!-- CONTACT SECTION -->
+      <section id="contact" style="padding: 4rem 5rem; text-align: center; background: var(--card-bg); margin-top: 2rem;">
+          <h2 style="font-family: 'Orbitron', sans-serif; color: var(--neon-cyan); margin-bottom: 2rem;">Contact Me</h2>
+          <p style="color: var(--text-color); font-size: 1.2rem; margin-bottom: 2rem;">Feel free to reach out for collaborations or just a friendly hello!</p>
+          <div style="display: flex; justify-content: center; gap: 2rem;">
+              <a href="mailto:kunalavghade77@gmail.com" style="color: var(--neon-pink); font-size: 2rem;"><i class="fas fa-envelope"></i></a>
+              <a href="https://www.linkedin.com/in/kunalavghade/" target="_blank" style="color: var(--neon-cyan); font-size: 2rem;"><i class="fab fa-linkedin"></i></a>
+              <a href="https://github.com/kunalavghade/" target="_blank" style="color: var(--text-color); font-size: 2rem;"><i class="fab fa-github"></i></a>
           </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="box">
-        <div class="container">
-          <img src="img/project/ischolar.png" alt="Avatar" class="image">
-          <div class="overlay">
-            <div class="text"> 
-            <p>
-                <b>Description :</b> Scholarship website with user & application management, deskwise approval system, Dashborad and sectional view.<br><br>
-                <b>Skills : </b> Java | Spring | Springboot | JPA | Spring security |Thymeleaf | bootstrap | HTML | CSS | JS | Git
-            </p>
-            <div class="half">
-              <div class="btn"><a target="_blank" href="https://github.com/kunalavghade/ischolar"><i class="fab fa-github"> Visit  </i> </a></div>
-              <div class="btn"><a target="_blank" href="https://github.com/kunalavghade/ischolar/wiki"><i class="fa fa-paper-plane" aria-hidden="true"> Live </i> </a></div></div>
-          </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="box">
-        <div class="container">
-          <img src="img/project/sellit.png" alt="Avatar" class="image">
-          <div class="overlay">
-            <div class="text"> 
-            <p>
-                <b>Description :</b> E commers website with user & Post management, user premium activation, Dashborad and sectional view.<br><br>
-                <b>Skills : </b> Java | Spring | Springboot | JPA | Spring security |Thymeleaf | bootstrap | HTML | CSS | JS | Git
-            </p>
-            <div class="half">
-              <div class="btn"><a target="_blank" href="https://github.com/kunalavghade/SelliT"><i class="fab fa-github"> Visit  </i> </a></div>
-              <div class="btn"><a target="_blank" href="https://github.com/kunalavghade/SelliT/wiki"><i class="fa fa-paper-plane" aria-hidden="true"> Live </i> </a></div></div>
-          </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="box">
-        <div class="container">
-          <img src="img/project/onlineib.png" alt="Avatar" class="image">
-          <div class="overlay">
-            <div class="text"> 
-            <p>
-                <b>Description :</b> Online library website to share Notes and books amoungs the student, user management and sectional view with simple UI<br><br>
-                <b>Skills : </b> Python | django | SQLite | Pythonanyware | HTML | CSS | JS | Git
-            </p>
-            <div class="half">
-              <div class="btn"><a target="_blank" href="https://github.com/kunalavghade/VBIRRS"><i class="fab fa-github"> Visit  </i> </a></div>
-              <div class="btn"><a target="_blank" href="https://github.com/kunalavghade/VBIRRS/wiki"><i class="fa fa-paper-plane" aria-hidden="true"> Live </i> </a></div></div>
-          </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="box">
-        <div class="container">
-          <img src="img/project/gms.png" alt="Avatar" class="image">
-          <div class="overlay">
-            <div class="text"> 
-            <p>
-                <b>Description :</b> IoT Green House Monitoring System, Collecting data and controlling actuator from remote loaction via IoT, Web sectional view.<br><br>
-                <b>Skills : </b> IoT | C/cpp | Esp8266 | Thingspeak | Python | django | HTML | CSS | JS | pythonanyware | Git
-            </p>
-            <div class="half">
-              <div class="btn"><a target="_blank" href="https://github.com/kunalavghade/Greenhouse_Monitoring_System"><i class="fab fa-github"> Visit  </i> </a></div>
-              <div class="btn"><a target="_blank" href="https://greenhousemonitoring.pythonanywhere.com/"><i class="fa fa-paper-plane" aria-hidden="true"> Live </i> </a></div></div>
-          </div>
-          </div>
-        </div>
-      </div>
-
-      
-      <div class="box">
-        <div class="container">
-          <img src="img/project/music.png" alt="Avatar" class="image">
-          <div class="overlay">
-            <div class="text"> 
-            <p>
-                <b>Description :</b> Groove Music Player Clone with operational functionality, Theme mode option, atrist/ album based view, search, etc <br><br>
-                <b>Skills : </b> python | Tkinter | pygame | SQLlite | Git
-            </p>
-            <div class="half">
-              <div class="btn"><a target="_blank" href="https://github.com/kunalavghade/Music-player-by-Python"><i class="fab fa-github"> Visit  </i> </a></div>
-              <div class="btn"><a target="_blank" href="https://github.com/kunalavghade/Music-player-by-Python/wiki/Music-Player"><i class="fa fa-paper-plane" aria-hidden="true"> Live </i> </a></div></div>
-          </div>
-          </div>
-        </div>
-      </div>
-
-
-      <div class="box">
-        <div class="container">
-          <img src="img/project/iotbridge.png" alt="Avatar" class="image">
-          <div class="overlay">
-            <div class="text"> 
-            <p>
-                <b>Description :</b> IoT based solution for river side bridges, data aquisation and controlling from remote location, operating with actuators and sesonrs, web section for dash board and controlling.<br><br>
-                <b>Skills : </b> Cpp | Adruino | Esp8266 | HTML | CSS | Embedded devices | sensors | actuators | hardware | LCD | etc.
-            </p>
-            <div class="half">
-              <div class="btn"><a target="_blank" href="https://github.com/kunalavghade/IoT_Bridge_Automation"><i class="fab fa-github"> Visit  </i> </a></div>
-              <div class="btn"><a target="_blank" href="https://github.com/kunalavghade/IoT_Bridge_Automation"><i class="fa fa-paper-plane" aria-hidden="true"> Live </i> </a></div></div>
-          </div>
-          </div>
-        </div>
-      </div>
-
-
-    </div>
-    
-    </section>
-
-
-    <section class="certificate" id="Certificates">
-      <h3 class="heading">Certificates</h3>
-
-      <div class="continer">
-
-
-            <img src="img/certificates/ibm.jpg" >
-            <img src="img/certificates/ml.jpg" >
-          
-
-            <img src="img/certificates/edge.jpg" >
-            <img src="img/certificates/python.jpg" >
-                    
-
-            <img src="img/certificates/google.jpg" >
-            <img src="img/certificates/java.jpg" >
-                    
-
-            <img src="img/certificates/problem.jpg" >
-            <img src="img/certificates/sql.jpg" >
-                    
-      </div>
-      
-    </section>
+          <p style="margin-top: 2rem; color: #666;">&copy; 2025 Kunal Avghade. All rights reserved.</p>
+      </section>
 
       </main>
 	</body>
   <script src="js/menu-mobile.js"></script>
   <script src="js/menu-education.js"></script>
   <script src="js/fadeInSection.js"></script>
+  <script src="js/background.js"></script>
+  <script src="https://unpkg.com/ityped@0.0.10"></script>
   <script>
-      window.ityped.init(document.querySelector('.ityped'),{
-                strings: ['Student','Programmer','Developer','Fast Learner'],
-                loop: true
-            })
+    window.ityped.init(document.querySelector('#ityped'), {
+      strings: ['Software Engineer', 'Full Stack Developer', 'Problem Solver', 'Tech Enthusiast'],
+      typeSpeed: 100,
+      backSpeed: 50,
+      loop: true
+    })
   </script>
 </html>
