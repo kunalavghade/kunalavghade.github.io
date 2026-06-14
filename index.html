@@ -86,62 +86,7 @@
       cursor: crosshair;
     }
 
-    /* Achievements & Publications */
-    #achievements,
-    #publications {
-      padding: 4rem 5rem;
-      background: var(--bg-color);
-    }
 
-    #achievements h2,
-    #publications h2 {
-      font-size: 2.5rem;
-      margin-left: 5.5rem;
-      color: var(--text-color);
-      margin-bottom: 2rem;
-    }
-
-    .list-item {
-      background: var(--card-bg);
-      padding: 1.5rem;
-      margin-bottom: 1rem;
-      border-radius: 10px;
-      border-left: 4px solid var(--accent-teal);
-      margin-left: 5.5rem;
-      margin-right: 5.5rem;
-      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-    }
-
-    .list-item h3 {
-      color: var(--text-color);
-      margin-bottom: 0.5rem;
-    }
-
-    .list-item p {
-      color: #aaa;
-    }
-
-    @media (max-width: 879px) {
-
-      #skills,
-      #achievements,
-      #publications {
-        padding: 4rem 1rem;
-        text-align: center;
-      }
-
-      #skills h2,
-      #achievements h2,
-      #publications h2 {
-        margin-left: 0;
-      }
-
-      .list-item {
-        margin-left: 0;
-        margin-right: 0;
-      }
-    }
-    
     /* Background Glow / Blobs */
     .bg-blob {
       position: fixed;
@@ -175,22 +120,61 @@
       margin: 0 auto;
     }
     .profile-card {
-      background: var(--card-bg);
-      border: 1px solid var(--border-color);
+      background: rgba(15, 15, 25, 0.6);
+      border: 1px solid rgba(0, 217, 255, 0.15);
+      backdrop-filter: blur(12px);
       border-radius: 16px;
-      padding: 2rem;
+      padding: 2.5rem 2rem;
       display: flex;
       flex-direction: column;
       align-items: center;
       text-align: center;
-      transition: all 0.3s ease;
+      transition: all 0.4s ease;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.5);
+    }
+    .profile-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; width: 100%; height: 100%;
+      background: radial-gradient(circle at top left, rgba(0, 217, 255, 0.1), transparent 60%);
+      pointer-events: none;
+      z-index: 0;
+    }
+    .profile-card > * { position: relative; z-index: 1; }
+    
+    .profile-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.6), 0 0 30px rgba(0, 217, 255, 0.2);
+      border-color: rgba(0, 217, 255, 0.5);
+    }
+    
+    .solution-card {
+      background: rgba(15, 15, 25, 0.6);
+      border: 1px solid rgba(0, 217, 255, 0.15);
+      backdrop-filter: blur(12px);
+      border-radius: 16px;
+      padding: 2.5rem;
+      transition: all 0.4s ease;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.5);
       position: relative;
       overflow: hidden;
     }
-    .profile-card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 10px 30px rgba(0, 217, 255, 0.1);
-      border-color: var(--accent-teal);
+    .solution-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; width: 100%; height: 100%;
+      background: radial-gradient(circle at top right, rgba(0, 217, 255, 0.1), transparent 60%);
+      pointer-events: none;
+      z-index: 0;
+    }
+    .solution-card > * { position: relative; z-index: 1; }
+    
+    .solution-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.6), 0 0 30px rgba(0, 217, 255, 0.2);
+      border-color: rgba(0, 217, 255, 0.5);
     }
     .profile-card img {
       width: 64px;
@@ -260,7 +244,9 @@
         <ul id="menu" role="menu">
           <li><a href="#home"><i class="fa fa-home" aria-hidden="true"></i> Home<span></span></a></li>
           <li><a href="#about"><i class="fa fa-bullseye" aria-hidden="true"></i> Mission<span></span></a></li>
-          <li><a href="#experience"><i class="fa fa-cogs" aria-hidden="true"></i> Solutions<span></span></a></li>
+          <li><a href="#experience"><i class="fa fa-briefcase" aria-hidden="true"></i> Experience<span></span></a></li>
+          <li><a href="#solutions"><i class="fa fa-cogs" aria-hidden="true"></i> Solutions<span></span></a></li>
+          <li><a href="#skills"><i class="fa fa-star" aria-hidden="true"></i> Skills<span></span></a></li>
           <li><a href="#projects"><i class="fa fa-archive" aria-hidden="true"></i> Featured Work<span></span></a></li>
           <li><a href="#contact"><i class="fa fa-envelope" aria-hidden="true"></i> Let's Work<span></span></a></li>
         </ul>
@@ -296,59 +282,67 @@
         </div>
       </section>
 
+      <!-- WORK EXPERIENCE SECTION -->
+      <section id="experience" data-anime="section-scroll">
+          <h2 style="text-align: center; margin-bottom: 3rem; font-size: 3rem; color: #fff; text-shadow: 0 0 15px rgba(0, 217, 255, 0.3); font-family: 'Comfortaa', cursive;">Work Experience</h2>
+          <div class="exp-grid">
+              <div class="exp-card">
+                  <div class="exp-icon"><i class="fas fa-briefcase"></i></div>
+                  <div class="exp-content">
+                      <h3>Software Engineer</h3>
+                      <p class="exp-company">Calfus Inc. | 2023 - Present</p>
+                      <ul>
+                          <li>Engineered high-scale, fault-tolerant microservices (Java/Spring Boot, Python/FastAPI) and orchestrated complex asynchronous workflows using Temporal and Kafka.</li>
+                          <li>Built a production-grade Python SDK and architected the backend for a <strong>Low-Code AI Agent Builder</strong>, enabling developers to easily deploy custom LLM workflows.</li>
+                          <li>Developed a high-performance data migration engine using gRPC and Redis, capable of transferring <strong>multi-terabyte datasets</strong> across hybrid-cloud environments with 99.9% integrity.</li>
+                          <li>Won the <strong>Drive Dynamo Award</strong> for 3 consecutive years (2023-2025) for exceptional technical delivery and leading technology adaptation.</li>
+                      </ul>
+                  </div>
+              </div>
+          </div>
+      </section>
+
       <!-- DIGITAL SOLUTIONS (SERVICES) SECTION -->
-      <section id="experience" data-anime="section-scroll" style="background: var(--bg-color); padding: 4rem 2rem; text-align: center; position: relative;">
+      <section id="solutions" data-anime="section-scroll" style="background: var(--bg-color); padding: 4rem 2rem; text-align: center; position: relative;">
         <h2 style="font-size: 3rem; margin-bottom: 1rem; margin-left: 0;">Our Digital Solutions</h2>
         <p style="max-width: 700px; margin: 0 auto 4rem auto; font-size: 1.15rem; color: var(--text-muted);">We provide cutting-edge technology solutions that drive growth, efficiency, and customer satisfaction.</p>
         
         <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; max-width: 1200px; margin: 0 auto; text-align: left;">
           
           <!-- Service 1 -->
-          <div style="background: var(--card-bg); padding: 2.5rem; border-radius: 16px; border: 1px solid var(--border-color); box-shadow: var(--shadow-light); transition: all 0.3s ease;" onmouseover="this.style.transform='translateY(-5px)'; this.style.borderColor='var(--accent-teal)'" onmouseout="this.style.transform='translateY(0)'; this.style.borderColor='var(--border-color)'">
-            <h3 style="font-size: 1.5rem; color: var(--accent-indigo); margin-bottom: 1rem;">Full-Stack Web Apps</h3>
-            <p style="color: var(--text-muted); margin-bottom: 1.5rem;">Building scalable, high-performance web applications with modern architectures and responsive designs.</p>
+          <div class="solution-card">
+            <h3 style="font-size: 1.5rem; color: #fff; margin-bottom: 1rem; font-family: 'Comfortaa', cursive;">Full-Stack Web Apps</h3>
+            <p style="color: var(--text-secondary); margin-bottom: 1.5rem; line-height: 1.6;">Building scalable, high-performance web applications with modern architectures and responsive designs.</p>
             <div style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
-              <span style="background: rgba(45, 212, 191, 0.1); color: var(--accent-teal); padding: 0.3rem 0.8rem; border-radius: 20px; font-size: 0.85rem; font-weight: 600;">Java/Spring Boot</span>
-              <span style="background: rgba(45, 212, 191, 0.1); color: var(--accent-teal); padding: 0.3rem 0.8rem; border-radius: 20px; font-size: 0.85rem; font-weight: 600;">React/NextJS</span>
-              <span style="background: rgba(45, 212, 191, 0.1); color: var(--accent-teal); padding: 0.3rem 0.8rem; border-radius: 20px; font-size: 0.85rem; font-weight: 600;">PostgreSQL</span>
+              <span style="background: rgba(0, 217, 255, 0.1); color: var(--accent-teal); padding: 0.3rem 0.8rem; border-radius: 20px; font-size: 0.85rem; font-weight: 600;">Java/Spring Boot</span>
+              <span style="background: rgba(0, 217, 255, 0.1); color: var(--accent-teal); padding: 0.3rem 0.8rem; border-radius: 20px; font-size: 0.85rem; font-weight: 600;">React/NextJS</span>
+              <span style="background: rgba(0, 217, 255, 0.1); color: var(--accent-teal); padding: 0.3rem 0.8rem; border-radius: 20px; font-size: 0.85rem; font-weight: 600;">PostgreSQL</span>
             </div>
           </div>
 
           <!-- Service 2 -->
-          <div style="background: var(--card-bg); padding: 2.5rem; border-radius: 16px; border: 1px solid var(--border-color); box-shadow: var(--shadow-light); transition: all 0.3s ease;" onmouseover="this.style.transform='translateY(-5px)'; this.style.borderColor='var(--accent-teal)'" onmouseout="this.style.transform='translateY(0)'; this.style.borderColor='var(--border-color)'">
-            <h3 style="font-size: 1.5rem; color: var(--accent-indigo); margin-bottom: 1rem;">AI & Machine Learning</h3>
-            <p style="color: var(--text-muted); margin-bottom: 1.5rem;">Delivering smart, AI-driven insights, LLM agents, and automated workflows to improve decision-making.</p>
+          <div class="solution-card">
+            <h3 style="font-size: 1.5rem; color: #fff; margin-bottom: 1rem; font-family: 'Comfortaa', cursive;">AI & Machine Learning</h3>
+            <p style="color: var(--text-secondary); margin-bottom: 1.5rem; line-height: 1.6;">Delivering smart, AI-driven insights, LLM agents, and automated workflows to improve decision-making.</p>
             <div style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
-              <span style="background: rgba(45, 212, 191, 0.1); color: var(--accent-teal); padding: 0.3rem 0.8rem; border-radius: 20px; font-size: 0.85rem; font-weight: 600;">Python</span>
-              <span style="background: rgba(45, 212, 191, 0.1); color: var(--accent-teal); padding: 0.3rem 0.8rem; border-radius: 20px; font-size: 0.85rem; font-weight: 600;">Temporal</span>
-              <span style="background: rgba(45, 212, 191, 0.1); color: var(--accent-teal); padding: 0.3rem 0.8rem; border-radius: 20px; font-size: 0.85rem; font-weight: 600;">FastAPI</span>
+              <span style="background: rgba(0, 217, 255, 0.1); color: var(--accent-teal); padding: 0.3rem 0.8rem; border-radius: 20px; font-size: 0.85rem; font-weight: 600;">Python</span>
+              <span style="background: rgba(0, 217, 255, 0.1); color: var(--accent-teal); padding: 0.3rem 0.8rem; border-radius: 20px; font-size: 0.85rem; font-weight: 600;">Temporal</span>
+              <span style="background: rgba(0, 217, 255, 0.1); color: var(--accent-teal); padding: 0.3rem 0.8rem; border-radius: 20px; font-size: 0.85rem; font-weight: 600;">FastAPI</span>
             </div>
           </div>
 
           <!-- Service 3 -->
-          <div style="background: var(--card-bg); padding: 2.5rem; border-radius: 16px; border: 1px solid var(--border-color); box-shadow: var(--shadow-light); transition: all 0.3s ease;" onmouseover="this.style.transform='translateY(-5px)'; this.style.borderColor='var(--accent-teal)'" onmouseout="this.style.transform='translateY(0)'; this.style.borderColor='var(--border-color)'">
-            <h3 style="font-size: 1.5rem; color: var(--accent-indigo); margin-bottom: 1rem;">Cloud & DevOps</h3>
-            <p style="color: var(--text-muted); margin-bottom: 1.5rem;">Optimized cloud architectures with automated CI/CD pipelines ensuring maximum scalability and performance.</p>
+          <div class="solution-card">
+            <h3 style="font-size: 1.5rem; color: #fff; margin-bottom: 1rem; font-family: 'Comfortaa', cursive;">Cloud & DevOps</h3>
+            <p style="color: var(--text-secondary); margin-bottom: 1.5rem; line-height: 1.6;">Optimized cloud architectures with automated CI/CD pipelines ensuring maximum scalability and performance.</p>
             <div style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
-              <span style="background: rgba(45, 212, 191, 0.1); color: var(--accent-teal); padding: 0.3rem 0.8rem; border-radius: 20px; font-size: 0.85rem; font-weight: 600;">AWS</span>
-              <span style="background: rgba(45, 212, 191, 0.1); color: var(--accent-teal); padding: 0.3rem 0.8rem; border-radius: 20px; font-size: 0.85rem; font-weight: 600;">Docker/K8s</span>
-              <span style="background: rgba(45, 212, 191, 0.1); color: var(--accent-teal); padding: 0.3rem 0.8rem; border-radius: 20px; font-size: 0.85rem; font-weight: 600;">RabbitMQ/gRPC</span>
+              <span style="background: rgba(0, 217, 255, 0.1); color: var(--accent-teal); padding: 0.3rem 0.8rem; border-radius: 20px; font-size: 0.85rem; font-weight: 600;">AWS</span>
+              <span style="background: rgba(0, 217, 255, 0.1); color: var(--accent-teal); padding: 0.3rem 0.8rem; border-radius: 20px; font-size: 0.85rem; font-weight: 600;">Docker/K8s</span>
+              <span style="background: rgba(0, 217, 255, 0.1); color: var(--accent-teal); padding: 0.3rem 0.8rem; border-radius: 20px; font-size: 0.85rem; font-weight: 600;">RabbitMQ/gRPC</span>
             </div>
           </div>
 
         </div>
-      </section>
-            </div>
-          </div>
-        </div>
-        <script>
-          function showExperience(id) {
-            document.querySelectorAll('#experience-right > div').forEach(div => div.style.display = 'none');
-            document.getElementById(id).style.display = 'block';
-            document.querySelectorAll('#experience-left li').forEach(li => li.classList.remove('experience-click'));
-            event.target.classList.add('experience-click');
-          }
-        </script>
       </section>
 
       <!-- SKILLS SECTION (Nebula Simulation) -->
@@ -863,13 +857,29 @@
       </section>
 
       <!-- CONTACT SECTION -->
-      <section id="contact" style="padding: 4rem 5rem; text-align: center; background: var(--card-bg); margin-top: 2rem;">
-          <h2 style="font-weight: 700; color: var(--text-color); margin-bottom: 2rem;">Contact Me</h2>
+      <section id="contact" style="padding: 6rem 2rem; text-align: center; position: relative; background: linear-gradient(to top, rgba(0, 217, 255, 0.05), transparent);">
+          <h2 style="font-weight: 700; color: #fff; margin-bottom: 1rem; font-size: 2.5rem; text-shadow: 0 0 15px rgba(0, 217, 255, 0.3); font-family: 'Comfortaa', cursive;">Contact Me</h2>
           <p style="color: var(--text-muted); font-size: 1.2rem; margin-bottom: 2rem;">Feel free to reach out for collaborations or just a friendly hello!</p>
-          <div style="display: flex; justify-content: center; gap: 2rem;">
-              <a href="mailto:kunalavghade77@gmail.com" style="color: var(--accent-indigo); font-size: 2rem; transition: 0.3s;" onmouseover="this.style.color='var(--accent-teal)'" onmouseout="this.style.color='var(--accent-indigo)'"><i class="fas fa-envelope"></i></a>
-              <a href="https://www.linkedin.com/in/kunalavghade/" target="_blank" style="color: var(--accent-indigo); font-size: 2rem; transition: 0.3s;" onmouseover="this.style.color='var(--accent-teal)'" onmouseout="this.style.color='var(--accent-indigo)'"><i class="fab fa-linkedin"></i></a>
-              <a href="https://github.com/kunalavghade/" target="_blank" style="color: var(--accent-indigo); font-size: 2rem; transition: 0.3s;" onmouseover="this.style.color='var(--accent-teal)'" onmouseout="this.style.color='var(--accent-indigo)'"><i class="fab fa-github"></i></a>
+          <div style="display: flex; justify-content: center; flex-wrap: wrap; gap: 1.5rem; max-width: 900px; margin: 0 auto 3rem auto;">
+              
+              <!-- Email Pill -->
+              <a href="mailto:kunalavghade77@gmail.com" style="background: rgba(15, 15, 25, 0.6); border: 1px solid rgba(0, 217, 255, 0.2); border-radius: 50px; padding: 1rem 2.5rem; text-decoration: none; display: flex; align-items: center; gap: 1rem; transition: all 0.3s ease; box-shadow: 0 5px 15px rgba(0,0,0,0.3); backdrop-filter: blur(12px);" onmouseover="this.style.transform='translateY(-3px)'; this.style.borderColor='rgba(0, 217, 255, 0.6)'; this.style.boxShadow='0 10px 25px rgba(0, 217, 255, 0.2)';" onmouseout="this.style.transform='translateY(0)'; this.style.borderColor='rgba(0, 217, 255, 0.2)'; this.style.boxShadow='0 5px 15px rgba(0,0,0,0.3)';">
+                  <i class="fas fa-envelope" style="font-size: 1.4rem; color: #00d9ff;"></i>
+                  <span style="color: #fff; font-size: 1.05rem; font-weight: 600;">Email Me</span>
+              </a>
+
+              <!-- LinkedIn Pill -->
+              <a href="https://www.linkedin.com/in/kunalavghade/" target="_blank" style="background: rgba(15, 15, 25, 0.6); border: 1px solid rgba(0, 217, 255, 0.2); border-radius: 50px; padding: 1rem 2.5rem; text-decoration: none; display: flex; align-items: center; gap: 1rem; transition: all 0.3s ease; box-shadow: 0 5px 15px rgba(0,0,0,0.3); backdrop-filter: blur(12px);" onmouseover="this.style.transform='translateY(-3px)'; this.style.borderColor='rgba(0, 217, 255, 0.6)'; this.style.boxShadow='0 10px 25px rgba(0, 217, 255, 0.2)';" onmouseout="this.style.transform='translateY(0)'; this.style.borderColor='rgba(0, 217, 255, 0.2)'; this.style.boxShadow='0 5px 15px rgba(0,0,0,0.3)';">
+                  <i class="fab fa-linkedin" style="font-size: 1.4rem; color: #00d9ff;"></i>
+                  <span style="color: #fff; font-size: 1.05rem; font-weight: 600;">LinkedIn</span>
+              </a>
+
+              <!-- GitHub Pill -->
+              <a href="https://github.com/kunalavghade/" target="_blank" style="background: rgba(15, 15, 25, 0.6); border: 1px solid rgba(0, 217, 255, 0.2); border-radius: 50px; padding: 1rem 2.5rem; text-decoration: none; display: flex; align-items: center; gap: 1rem; transition: all 0.3s ease; box-shadow: 0 5px 15px rgba(0,0,0,0.3); backdrop-filter: blur(12px);" onmouseover="this.style.transform='translateY(-3px)'; this.style.borderColor='rgba(0, 217, 255, 0.6)'; this.style.boxShadow='0 10px 25px rgba(0, 217, 255, 0.2)';" onmouseout="this.style.transform='translateY(0)'; this.style.borderColor='rgba(0, 217, 255, 0.2)'; this.style.boxShadow='0 5px 15px rgba(0,0,0,0.3)';">
+                  <i class="fab fa-github" style="font-size: 1.4rem; color: #00d9ff;"></i>
+                  <span style="color: #fff; font-size: 1.05rem; font-weight: 600;">GitHub</span>
+              </a>
+
           </div>
           <p style="margin-top: 2rem; color: var(--text-muted);">&copy; 2026 Kunal Avghade. All rights reserved.</p>
       </section>

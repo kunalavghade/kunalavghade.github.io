@@ -1,154 +1,101 @@
 #experience {
-  background: var(--bg-color);
-  padding: 4rem 2rem;
+    padding: 6rem 2rem 2rem 2rem;
+    position: relative;
+    background: var(--bg-color);
 }
 
-#experience h2 {
-  font-size: 2.5rem;
-  margin-left: 5.5rem;
-  color: var(--text-color);
-  font-weight: 700;
-  margin-bottom: 2rem;
+.exp-grid {
+    display: flex;
+    justify-content: center;
+    max-width: 800px;
+    margin: 0 auto;
 }
 
-#experience-div {
-  display: flex;
-  justify-content: center;
-  gap: 7rem;
-  margin-top: 3rem;
+.exp-card {
+    background: rgba(15, 15, 25, 0.6);
+    border: 1px solid rgba(0, 217, 255, 0.15);
+    backdrop-filter: blur(12px);
+    border-radius: 16px;
+    width: 100%;
+    padding: 3rem;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    gap: 2rem;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.5);
+    position: relative;
+    overflow: hidden;
+    transition: all 0.4s ease;
 }
 
-#experience-left {
-  width: 15rem;
-  height: 100%;
-  border-left: 3px solid var(--border-color);
+.exp-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: radial-gradient(circle at top left, rgba(0, 217, 255, 0.15), transparent 70%);
+    pointer-events: none;
+    z-index: 0;
 }
 
-#experience-left ul {
-  list-style: none;
+.exp-card > * {
+    position: relative;
+    z-index: 1;
 }
 
-#experience-left li {
-  padding: 0.9rem 0;
-  padding-left: 10px;
-  width: 100%;
-  cursor: pointer;
-  color: var(--text-muted);
-  transition: all 0.3s ease;
-  font-weight: 500;
+.exp-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.6), 0 0 30px rgba(0, 217, 255, 0.2);
+    border-color: rgba(0, 217, 255, 0.5);
 }
 
-#experience-left li:hover {
-  background: rgba(45, 212, 191, 0.05);
-  color: var(--accent-teal);
-  padding-left: 20px;
+.exp-icon {
+    font-size: 3.5rem;
+    color: #00d9ff;
+    flex-shrink: 0;
+    text-shadow: 0 0 20px rgba(0, 217, 255, 0.6);
+    transition: transform 0.3s ease;
 }
 
-.experience-click {
-  background: rgba(45, 212, 191, 0.1);
-  color: var(--accent-teal) !important;
-  border-left: 3px solid var(--accent-teal);
-  margin-left: -3px;
+.exp-card:hover .exp-icon {
+    transform: scale(1.1);
 }
 
-#experience-right {
-  width: 43rem;
-  height: auto;
-  background: var(--card-bg);
-  padding: 2rem 2.5rem;
-  border-radius: 12px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
-  border: 1px solid var(--border-color);
+.exp-content h3 {
+    color: #fff;
+    font-size: 1.5rem;
+    margin-bottom: 0.3rem;
+    font-family: 'Comfortaa', cursive;
 }
 
-#experience-right h3 {
-  font-size: 1.5rem;
-  color: var(--accent-indigo);
-  margin-bottom: 0.5rem;
+.exp-company {
+    color: var(--accent-teal);
+    font-size: 1rem;
+    font-weight: 600;
+    margin-bottom: 1.5rem;
 }
 
-#experience-right p {
-  color: var(--text-muted);
-  font-size: 0.95rem;
+.exp-content ul {
+    color: var(--text-secondary);
+    font-size: 0.95rem;
+    line-height: 1.7;
+    padding-left: 1.2rem;
 }
 
-#experience-right h4 {
-  color: var(--accent-teal);
-  margin: 1rem 0 2rem;
-  font-weight: 500;
+.exp-content ul li {
+    margin-bottom: 0.8rem;
+}
+.exp-content ul li strong {
+    color: #fff;
 }
 
-.company-active {
-  display: block;
-}
-
-.text-focus-in {
-  -webkit-animation: text-focus-in 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
-  animation: text-focus-in 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
-}
-
-@-webkit-keyframes text-focus-in {
-  0% {
-    -webkit-filter: blur(8px);
-    filter: blur(8px);
-    opacity: 0;
-  }
-  100% {
-    -webkit-filter: blur(0px);
-    filter: blur(0px);
-    opacity: 1;
-  }
-}
-
-@keyframes text-focus-in {
-  0% {
-    -webkit-filter: blur(8px);
-    filter: blur(8px);
-    opacity: 0;
-  }
-  100% {
-    -webkit-filter: blur(0px);
-    filter: blur(0px);
-    opacity: 1;
-  }
-}
-
-@media (max-width: 879px) {
-  #experience {
-    padding: 4rem 1rem;
-    text-align: center;
-  }
-
-  #experience h2 {
-    margin: auto;
-  }
-
-  #experience-div {
-    display: block;
-  }
-
-  #experience-left {
-    margin: auto;
-    border-left: none;
-    margin-bottom: 3rem;
-  }
-
-  .experience-click {
-    border-left: none;
-    border-bottom: 2px solid var(--accent-teal);
-    background: rgba(45, 212, 191, 0.1);
-    margin-left: 0;
-  }
-
-  #experience-right {
-    width: auto;
-    margin-top: 3rem;
-    padding: 1.5rem;
-  }
-}
-
-@media (max-width: 500px) {
-  #experience-right {
-    padding-bottom: 3rem;
-  }
+@media (max-width: 600px) {
+    .exp-card {
+        flex-direction: column;
+        padding: 2rem;
+        align-items: center;
+        text-align: center;
+    }
+    .exp-content ul {
+        text-align: left;
+    }
 }
