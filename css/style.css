@@ -12,6 +12,42 @@
     --glass-bg: rgba(10, 10, 10, 0.7);
     --border-color: rgba(255, 255, 255, 0.1);
     --shadow-light: 0 4px 20px rgba(0, 217, 255, 0.05);
+
+    /* Glass Morphism Variables */
+    --card-glass-bg: rgba(15, 15, 25, 0.6);
+    --card-glass-solid: rgba(15, 15, 25, 0.8);
+    --accent-border: rgba(0, 217, 255, 0.15);
+    --accent-border-hover: rgba(0, 217, 255, 0.5);
+    --accent-glow: rgba(0, 217, 255, 0.1);
+    --shadow-dark: rgba(0, 0, 0, 0.5);
+    --shadow-hover: rgba(0, 0, 0, 0.6);
+    --icon-color: #00d9ff;
+    --gradient-purple: rgba(106, 13, 173, 0.05);
+}
+
+[data-theme="light"] {
+    --bg-color: #f8fafc;
+    --card-bg: rgba(255, 255, 255, 0.7);
+    --text-color: #0f172a;
+    --text-muted: #64748b;
+    --text-secondary: #334155;
+    --accent-teal: #0284c7;
+    --accent-indigo: #4f46e5;
+    --accent-yellow: #d97706;
+    --glass-bg: rgba(255, 255, 255, 0.85);
+    --border-color: rgba(0, 0, 0, 0.1);
+    --shadow-light: 0 4px 20px rgba(0, 0, 0, 0.05);
+
+    /* Glass Morphism Variables */
+    --card-glass-bg: rgba(255, 255, 255, 0.7);
+    --card-glass-solid: rgba(255, 255, 255, 0.95);
+    --accent-border: rgba(2, 132, 199, 0.2);
+    --accent-border-hover: rgba(2, 132, 199, 0.6);
+    --accent-glow: rgba(2, 132, 199, 0.05);
+    --shadow-dark: rgba(0, 0, 0, 0.05);
+    --shadow-hover: rgba(0, 0, 0, 0.1);
+    --icon-color: #0284c7;
+    --gradient-purple: rgba(79, 70, 229, 0.05);
 }
 
 * {

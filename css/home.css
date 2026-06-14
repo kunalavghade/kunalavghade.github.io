@@ -75,26 +75,26 @@
 }
 
 #div-social a:first-child {
-  background: rgba(0, 217, 255, 0.05);
-  color: rgba(0, 217, 255, 0.9);
-  border: 1px solid rgba(0, 217, 255, 0.25);
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  background: var(--accent-glow);
+  color: var(--accent-teal);
+  border: 1px solid var(--accent-border);
+  box-shadow: 0 4px 15px var(--shadow-dark);
 }
 
 #div-social a:first-child:hover {
-  background: rgba(0, 217, 255, 0.15);
+  background: var(--accent-border);
   transform: translateY(-3px);
-  box-shadow: 0 8px 25px rgba(0, 217, 255, 0.2);
+  box-shadow: 0 8px 25px var(--accent-glow);
 }
 
 #div-social a:last-child {
-  background: rgba(255, 255, 255, 0.03);
+  background: var(--card-glass-bg);
   color: var(--text-secondary);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  border: 1px solid var(--border-color);
 }
 
 #div-social a:last-child:hover {
-  background: rgba(255, 255, 255, 0.1);
+  background: var(--card-glass-solid);
   color: var(--text-color);
   transform: translateY(-3px);
 }

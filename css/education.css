@@ -1,6 +1,6 @@
 #education {
-  background: radial-gradient(circle at 10% 90%, rgba(106, 13, 173, 0.1), transparent 40%),
-              radial-gradient(circle at 90% 10%, rgba(0, 217, 255, 0.1), transparent 40%),
+  background: radial-gradient(circle at 10% 90%, var(--gradient-purple), transparent 40%),
+              radial-gradient(circle at 90% 10%, var(--accent-glow), transparent 40%),
               var(--bg-color);
   padding: 4rem 2rem;
   position: relative;
@@ -11,7 +11,7 @@
   font-size: 3rem;
   color: var(--text-color);
   font-weight: 700;
-  text-shadow: 0 0 15px rgba(0, 217, 255, 0.3);
+  text-shadow: 0 0 15px var(--accent-glow);
 }
 
 .timeline-container {
@@ -22,8 +22,8 @@
 
 .timeline {
   position: relative;
-  border-left: 2px solid rgba(0, 217, 255, 0.3);
-  box-shadow: -2px 0 15px rgba(0, 217, 255, 0.15); /* Glowing beam */
+  border-left: 2px solid var(--accent-border);
+  box-shadow: -2px 0 15px var(--accent-glow); /* Glowing beam */
   padding-left: 3rem;
   margin-left: 1rem;
 }
@@ -44,29 +44,29 @@
   width: 20px;
   height: 20px;
   border-radius: 50%;
-  background: #050510;
+  background: var(--bg-color);
   border: 3px solid var(--accent-teal);
-  box-shadow: 0 0 15px rgba(0, 217, 255, 0.8), 0 0 30px rgba(0, 217, 255, 0.4);
+  box-shadow: 0 0 15px var(--accent-border-hover), 0 0 30px var(--accent-glow);
   z-index: 2;
   transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.4s ease, background 0.4s ease;
   animation: pulseStar 3s infinite alternate;
 }
 
 @keyframes pulseStar {
-  0% { box-shadow: 0 0 10px rgba(0, 217, 255, 0.4), 0 0 20px rgba(0, 217, 255, 0.1); }
-  100% { box-shadow: 0 0 20px rgba(0, 217, 255, 1), 0 0 40px rgba(0, 217, 255, 0.5); }
+  0% { box-shadow: 0 0 10px var(--accent-border), 0 0 20px var(--accent-glow); }
+  100% { box-shadow: 0 0 20px var(--accent-teal), 0 0 40px var(--accent-border-hover); }
 }
 
 .timeline-item:hover .timeline-dot {
   transform: scale(1.4);
-  box-shadow: 0 0 30px rgba(0, 217, 255, 1), 0 0 60px rgba(0, 217, 255, 0.8);
+  box-shadow: 0 0 30px var(--accent-teal), 0 0 60px var(--accent-border-hover);
   background: var(--accent-teal);
   animation: none;
 }
 
 .timeline-content {
-  background: rgba(15, 15, 25, 0.6);
-  border: 1px solid rgba(0, 217, 255, 0.15);
+  background: var(--card-glass-bg);
+  border: 1px solid var(--accent-border);
   backdrop-filter: blur(12px);
   border-radius: 12px;
   padding: 1.5rem 2rem;
@@ -79,7 +79,7 @@
   content: '';
   position: absolute;
   top: 0; left: 0; width: 100%; height: 100%;
-  background: radial-gradient(circle at top right, rgba(0, 217, 255, 0.1), transparent 60%);
+  background: radial-gradient(circle at top right, var(--accent-glow), transparent 60%);
   pointer-events: none;
   z-index: 0;
 }
@@ -91,8 +91,8 @@
 
 .timeline-content:hover {
   transform: translateY(-8px);
-  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.6), 0 0 30px rgba(0, 217, 255, 0.2);
-  border-color: rgba(0, 217, 255, 0.5);
+  box-shadow: 0 15px 40px var(--shadow-hover), 0 0 30px var(--accent-glow);
+  border-color: var(--accent-border-hover);
 }
 
 .timeline-date {
@@ -124,8 +124,8 @@
 }
 
 .timeline-skill-chip {
-  background: rgba(0, 217, 255, 0.05);
-  border: 1px solid rgba(0, 217, 255, 0.2);
+  background: var(--accent-glow);
+  border: 1px solid var(--accent-border);
   color: var(--text-secondary);
   padding: 0.3rem 0.8rem;
   border-radius: 20px;
@@ -134,9 +134,9 @@
 }
 
 .timeline-skill-chip:hover {
-  background: rgba(0, 217, 255, 0.15);
+  background: var(--accent-border);
   border-color: var(--accent-teal);
-  color: #fff;
+  color: var(--bg-color);
 }
 
 @media (max-width: 768px) {
