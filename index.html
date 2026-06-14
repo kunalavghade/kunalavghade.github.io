@@ -13,6 +13,7 @@
   <link rel="stylesheet" href="css/project.css" />
   <link rel="stylesheet" href="css/cirti.css" />
   <link rel="stylesheet" href="css/exp.css" />
+  <link rel="stylesheet" href="css/extra.css" />
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -764,41 +765,101 @@
         </div>
       </section>
 
-      <!-- ACHIEVEMENTS SECTION (NEW) -->
-      <section id="achievements" data-anime="section-scroll">
-          <h2>Achievements</h2>
-          <div class="list-item">
-              <h3>Drive Dynamo (Calfus Inc. Award)</h3>
-              <p>Won Award for Most Dynamic Technology Adaptation and Pushing Boundaries (2023-2025).</p>
-          </div>
-          <div class="list-item">
-              <h3>Problem Solving</h3>
-              <p>Solved 1000+ Questions. Top 7% coders in LeetCode (Rank < 13K).</p>
-          </div>
-          <div class="list-item">
-              <h3>Hackerrank Certificates</h3>
-              <p>Obtained 6 Badges, Passed 7 Certification Tests.</p>
-          </div>
-      </section>
-
-      <!-- PUBLICATIONS SECTION (NEW) -->
-      <section id="publications" data-anime="section-scroll">
-          <h2>Publications</h2>
-          <div class="list-item">
-              <h3>Vision Based Intelligent Recipe Recommendation System</h3>
-              <p>Eur. Chem. Bull. 2023 (DOI: 10.48047/ecb/2023.12.si4.1124)</p>
-          </div>
-      </section>
-
       <!-- CERTIFICATES SECTION -->
-      <section class="certificate" id="Certificates">
-        <h3 class="heading">Certificates</h3>
-        <div class="continer">
-              <img src="img/certificates/ibm.jpg" alt="IBM AI Engineering">
-              <img src="img/certificates/ml.jpg" alt="Machine Learning">
-              <img src="img/certificates/edge.jpg" alt="AWS Certified Solutions Architect"> <!-- Assuming this maps to one of the AWS certs -->
-              <img src="img/certificates/python.jpg" alt="AWS Certified Cloud Practitioner"> <!-- Assuming this maps to one of the AWS certs -->
+      <section class="certificate" id="Certificates" data-anime="section-scroll">
+        <h2 style="text-align: center; margin-bottom: 3rem; font-size: 3rem; color: #fff; text-shadow: 0 0 15px rgba(0, 217, 255, 0.3); font-family: 'Comfortaa', cursive;">Certifications</h2>
+        
+        <div class="cert-grid">
+          
+          <!-- AWS Solutions Architect -->
+          <div class="cert-card aws-cert">
+            <div class="cert-icon"><i class="fab fa-aws"></i></div>
+            <div class="cert-content">
+                <h3>AWS Certified Solutions Architect</h3>
+                <p class="cert-level">Associate</p>
+                <div class="cert-details">
+                    <p><span>Issued:</span> July 14, 2025</p>
+                    <p><span>Expires:</span> July 14, 2028</p>
+                    <p><span>ID:</span> f0c68c1ef0e643a4bbcb0ccce7080210</p>
+                </div>
+                <a href="https://aws.amazon.com/verification" target="_blank" class="cert-btn"><i class="fas fa-check-circle"></i> Verify Link</a>
+            </div>
+          </div>
+
+          <!-- AWS Cloud Practitioner -->
+          <div class="cert-card aws-cert">
+            <div class="cert-icon"><i class="fab fa-aws"></i></div>
+            <div class="cert-content">
+                <h3>AWS Certified Cloud Practitioner</h3>
+                <p class="cert-level">Foundational</p>
+                <div class="cert-details">
+                    <p><span>Issued:</span> June 3, 2025</p>
+                    <p><span>Expires:</span> July 14, 2028</p>
+                    <p><span>ID:</span> c767873a1f994a5e83a9ac92ec28ddc3</p>
+                </div>
+                <a href="https://aws.amazon.com/verification" target="_blank" class="cert-btn"><i class="fas fa-check-circle"></i> Verify Link</a>
+            </div>
+          </div>
+
+          <!-- IBM AI Engineering -->
+          <div class="cert-card image-cert">
+            <img src="img/certificates/ibm.jpg" alt="IBM AI Engineering">
+            <div class="cert-overlay">
+                <h3>IBM AI Engineering</h3>
+            </div>
+          </div>
+
+          <!-- Machine Learning -->
+          <div class="cert-card image-cert">
+            <img src="img/certificates/ml.jpg" alt="Machine Learning">
+            <div class="cert-overlay">
+                <h3>Machine Learning</h3>
+            </div>
+          </div>
+
         </div>
+      </section>
+
+      <!-- ACHIEVEMENTS SECTION -->
+      <section id="achievements" class="extra-section" data-anime="section-scroll">
+          <h2 class="extra-heading">Achievements</h2>
+          <div class="extra-grid">
+              <div class="extra-card">
+                  <div class="extra-icon"><i class="fas fa-trophy"></i></div>
+                  <div class="extra-content">
+                      <h3>Drive Dynamo (Calfus Inc. Award)</h3>
+                      <p>Won Award for Most Dynamic Technology Adaptation and Pushing Boundaries (2023-2025).</p>
+                  </div>
+              </div>
+              <div class="extra-card">
+                  <div class="extra-icon"><i class="fas fa-code"></i></div>
+                  <div class="extra-content">
+                      <h3>Problem Solving</h3>
+                      <p>Solved 1000+ Questions. Top 7% coders in LeetCode (Rank < 13K).</p>
+                  </div>
+              </div>
+              <div class="extra-card">
+                  <div class="extra-icon"><i class="fab fa-hackerrank"></i></div>
+                  <div class="extra-content">
+                      <h3>Hackerrank Certificates</h3>
+                      <p>Obtained 6 Badges, Passed 7 Certification Tests.</p>
+                  </div>
+              </div>
+          </div>
+      </section>
+
+      <!-- PUBLICATIONS SECTION -->
+      <section id="publications" class="extra-section" data-anime="section-scroll">
+          <h2 class="extra-heading">Publications</h2>
+          <div class="extra-grid">
+              <div class="extra-card">
+                  <div class="extra-icon"><i class="fas fa-book-open"></i></div>
+                  <div class="extra-content">
+                      <h3>Vision Based Intelligent Recipe Recommendation System</h3>
+                      <p>Eur. Chem. Bull. 2023 (DOI: 10.48047/ecb/2023.12.si4.1124)</p>
+                  </div>
+              </div>
+          </div>
       </section>
 
       <!-- CONTACT SECTION -->
