@@ -1,14 +1,14 @@
 #experience {
   background: var(--bg-color);
-  padding: 8rem 5rem;
+  padding: 4rem 2rem;
 }
 
 #experience h2 {
   font-size: 2.5rem;
   margin-left: 5.5rem;
-  color: var(--neon-cyan);
-  text-shadow: 0 0 5px var(--neon-cyan);
-  font-family: 'Orbitron', sans-serif;
+  color: var(--text-color);
+  font-weight: 700;
+  margin-bottom: 2rem;
 }
 
 #experience-div {
@@ -21,8 +21,7 @@
 #experience-left {
   width: 15rem;
   height: 100%;
-  border-left: 3px solid var(--neon-cyan);
-  box-shadow: -2px 0 10px rgba(0, 243, 255, 0.2);
+  border-left: 3px solid var(--border-color);
 }
 
 #experience-left ul {
@@ -34,56 +33,66 @@
   padding-left: 10px;
   width: 100%;
   cursor: pointer;
-  color: var(--text-color);
-  transition: 0.3s;
+  color: var(--text-muted);
+  transition: all 0.3s ease;
+  font-weight: 500;
 }
 
 #experience-left li:hover {
-  background: rgba(0, 243, 255, 0.1);
-  color: var(--neon-cyan);
-  text-shadow: 0 0 5px var(--neon-cyan);
+  background: rgba(45, 212, 191, 0.05);
+  color: var(--accent-teal);
   padding-left: 20px;
 }
 
 .experience-click {
-  background: rgba(0, 243, 255, 0.1);
-  color: var(--neon-cyan) !important;
-  border-right: 3px solid var(--neon-cyan);
+  background: rgba(45, 212, 191, 0.1);
+  color: var(--accent-teal) !important;
+  border-left: 3px solid var(--accent-teal);
+  margin-left: -3px;
 }
 
 #experience-right {
   width: 43rem;
   height: auto;
+  background: var(--card-bg);
+  padding: 2rem 2.5rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+  border: 1px solid var(--border-color);
 }
 
 #experience-right h3 {
   font-size: 1.5rem;
-  color: var(--neon-pink);
-  text-shadow: 0 0 5px var(--neon-pink);
+  color: var(--accent-indigo);
+  margin-bottom: 0.5rem;
+}
+
+#experience-right p {
+  color: var(--text-muted);
+  font-size: 0.95rem;
 }
 
 #experience-right h4 {
-  color: var(--neon-cyan);
-  margin: 2rem 0;
+  color: var(--accent-teal);
+  margin: 1rem 0 2rem;
+  font-weight: 500;
 }
-
 
 .company-active {
   display: block;
 }
 
 .text-focus-in {
-  -webkit-animation: text-focus-in 0.5s linear;
-  animation: text-focus-in 0.5s linear;
+  -webkit-animation: text-focus-in 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+  animation: text-focus-in 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
 }
 
 @-webkit-keyframes text-focus-in {
   0% {
-    -webkit-filter: blur(12px);
-    filter: blur(12px);
+    -webkit-filter: blur(8px);
+    filter: blur(8px);
     opacity: 0;
   }
-
   100% {
     -webkit-filter: blur(0px);
     filter: blur(0px);
@@ -93,11 +102,10 @@
 
 @keyframes text-focus-in {
   0% {
-    -webkit-filter: blur(12px);
-    filter: blur(12px);
+    -webkit-filter: blur(8px);
+    filter: blur(8px);
     opacity: 0;
   }
-
   100% {
     -webkit-filter: blur(0px);
     filter: blur(0px);
@@ -106,9 +114,8 @@
 }
 
 @media (max-width: 879px) {
-
   #experience {
-    padding: 5rem 1.5rem;
+    padding: 4rem 1rem;
     text-align: center;
   }
 
@@ -123,23 +130,25 @@
   #experience-left {
     margin: auto;
     border-left: none;
-    margin-bottom: 4rem;
+    margin-bottom: 3rem;
   }
 
   .experience-click {
-    border-bottom: 1px solid var(--neon-cyan);
-    border-right: none;
-    background: rgba(0, 243, 255, 0.1);
+    border-left: none;
+    border-bottom: 2px solid var(--accent-teal);
+    background: rgba(45, 212, 191, 0.1);
+    margin-left: 0;
   }
 
   #experience-right {
     width: auto;
     margin-top: 3rem;
+    padding: 1.5rem;
   }
 }
 
 @media (max-width: 500px) {
   #experience-right {
-    padding-bottom: 6rem;
+    padding-bottom: 3rem;
   }
 }

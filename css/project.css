@@ -1,20 +1,18 @@
 .projects {
   background: var(--bg-color);
-  padding: 8rem 5rem 8rem 5rem;
+  padding: 4rem 2rem;
 }
 
 .projects h1 {
   font-size: 2.5rem;
   margin-left: 5.5rem;
   margin-bottom: 2rem;
-  color: var(--neon-cyan);
-  text-shadow: 0 0 5px var(--neon-cyan);
-  font-family: 'Orbitron', sans-serif;
+  color: var(--text-color);
+  font-weight: 700;
 }
 
 .projects .heading span {
-  color: var(--neon-pink);
-  text-shadow: 0 0 5px var(--neon-pink);
+  color: var(--accent-indigo);
 }
 
 .projects .box-container {
@@ -26,14 +24,17 @@
 .projects .box-container .box {
   width: 25%;
   margin: 1rem;
-  border-radius: 1rem;
+  border-radius: 12px;
   border: 1px solid var(--border-color);
-  transition: 0.3s;
+  transition: all 0.3s ease;
+  background: var(--card-bg);
+  overflow: hidden;
 }
 
 .projects .box-container .box:hover {
-  border: 1px solid var(--neon-cyan);
-  box-shadow: 0 0 15px rgba(0, 243, 255, 0.2);
+  border: 1px solid var(--accent-teal);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+  transform: translateY(-5px);
 }
 
 .container {
@@ -42,13 +43,13 @@
 
 .image {
   display: block;
-  border-radius: 1rem;
+  border-radius: 12px 12px 0 0;
   width: 100%;
   height: auto;
 }
 
 .overlay {
-  border-radius: 0.9rem;
+  border-radius: 12px 12px 0 0;
   position: absolute;
   top: 0;
   bottom: 0;
@@ -58,7 +59,7 @@
   width: 100%;
   opacity: 0;
   transition: .5s ease;
-  background-color: rgba(5, 5, 5, 0.9);
+  background-color: rgba(15, 23, 42, 0.9);
   backdrop-filter: blur(5px);
 }
 
@@ -67,67 +68,71 @@
 }
 
 .text {
-  color: white;
+  color: #f8fafc;
   position: absolute;
   top: 50%;
   left: 50%;
   width: 100%;
-  -webkit-transform: translate(-50%, -50%);
-  -ms-transform: translate(-50%, -50%);
   transform: translate(-50%, -50%);
   text-align: center;
 }
 
-.projects .box-container .box p {
-  text-align: justify;
-  padding: 1rem;
-  color: var(--text-color);
+.projects .box-container .box .text p {
+  text-align: center;
+  padding: 1.5rem;
+  color: #cbd5e1;
+  font-size: 0.95rem;
+}
+
+.projects .box-container .box .text p b {
+  color: #f8fafc;
+  font-size: 1.1rem;
 }
 
 .projects .box-container .box .half {
   display: flex;
   align-items: stretch;
   justify-content: center;
+  padding-bottom: 1.5rem;
 }
 
 .projects .box-container .box .half .btn {
-  width: 50%;
+  width: 100%;
   display: flex;
   justify-content: center;
 }
 
 .projects .box-container .box .half .btn a {
-  border: 1px solid var(--neon-cyan);
-  padding: 0.8rem;
-  width: 70%;
+  border: 1px solid var(--border-color);
+  padding: 0.8rem 1.5rem;
   text-align: center;
-  border-radius: 0.5rem;
+  border-radius: 8px;
   text-decoration: none;
-  color: var(--neon-cyan);
-  transition: 0.3s;
+  color: var(--text-color);
+  transition: all 0.3s ease;
+  font-weight: 500;
+  background: var(--bg-color);
 }
 
 .projects .box-container .box .half .btn i {
-  font-size: 20px;
+  font-size: 18px;
+  margin-right: 5px;
 }
 
 .projects .box-container .box .half .btn a:hover {
-  background-color: var(--neon-cyan);
-  color: #000;
-  box-shadow: 0 0 5px var(--neon-cyan), 0 0 25px var(--neon-cyan), 0 0 45px var(--neon-cyan);
+  background-color: var(--accent-indigo);
+  border-color: var(--accent-indigo);
+  color: #ffffff;
 }
-
 
 @media (max-width: 900px) {
   .projects {
-    background: var(--bg-color);
-    padding: 8rem 1rem
+    padding: 4rem 1rem;
   }
 
   .projects .box-container .box {
     width: 45%;
     margin: 1rem;
-    border-radius: 1rem;
   }
 
   .projects h1 {
@@ -136,20 +141,16 @@
     margin-left: 0rem;
     margin-bottom: 0rem;
   }
-
 }
-
 
 @media (max-width: 500px) {
   .projects {
-    background: var(--bg-color);
-    padding: 8rem 1rem
+    padding: 4rem 1rem;
   }
 
   .projects .box-container .box {
     width: 100%;
     margin: 1rem;
-    border-radius: 1rem;
   }
 
   .projects h1 {
@@ -158,5 +159,4 @@
     margin-left: 0rem;
     margin-bottom: 0rem;
   }
-
 }

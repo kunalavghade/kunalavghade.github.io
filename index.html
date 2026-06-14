@@ -16,12 +16,9 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link
-    href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Noto+Sans+JP:wght@400;700&display=swap"
-    rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css">
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
   <style>
     #canvas-container {
       position: fixed;
@@ -33,64 +30,59 @@
       opacity: 0.6;
     }
 
-    /* Skills Section Styles */
+    /* Astronomical Nebula Skill Graph Styles */
     #skills {
-      padding: 8rem 5rem;
+      padding: 0;
       background: var(--bg-color);
+      position: relative;
     }
 
-    #skills h2 {
-      font-size: 2.5rem;
-      margin-left: 5.5rem;
-      color: var(--neon-cyan);
-      text-shadow: 0 0 5px var(--neon-cyan);
-      font-family: 'Orbitron', sans-serif;
-      margin-bottom: 3rem;
-    }
-
-    .skills-container {
+    #nebula-container {
+      width: 100%;
+      height: 100vh;
+      min-height: 900px;
+      position: relative;
+      background: var(--bg-color);
+      overflow: hidden;
       display: flex;
-      flex-wrap: wrap;
+      flex-direction: column;
+      align-items: center;
       justify-content: center;
-      gap: 2rem;
     }
 
-    .skill-category {
-      background: var(--card-bg);
-      padding: 2rem;
-      border-radius: 10px;
-      border: 1px solid var(--border-color);
-      width: 300px;
-      transition: 0.3s;
-    }
-
-    .skill-category:hover {
-      border-color: var(--neon-pink);
-      box-shadow: 0 0 15px rgba(255, 0, 255, 0.2);
-    }
-
-    .skill-category h3 {
-      color: var(--neon-pink);
-      margin-bottom: 1rem;
+    #skills-title-overlay {
+      position: absolute;
+      top: 5%;
+      left: 50%;
+      transform: translateX(-50%);
       text-align: center;
-      font-family: 'Orbitron', sans-serif;
+      z-index: 10;
+      pointer-events: none;
+      width: 100%;
     }
 
-    .skill-list {
-      list-style: none;
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.5rem;
-      justify-content: center;
+    #skills-title-overlay h2 {
+      font-size: 3rem;
+      margin-bottom: 0.5rem;
+      color: #fff;
+      text-shadow: 0 0 20px rgba(0, 217, 255, 0.5);
+    }
+    
+    #skills-title-overlay p {
+      max-width: 600px;
+      margin: 0 auto;
+      font-size: 1.1rem;
+      color: rgba(255,255,255,0.7);
     }
 
-    .skill-item {
-      background: rgba(0, 243, 255, 0.1);
-      color: var(--neon-cyan);
-      padding: 0.5rem 1rem;
-      border-radius: 5px;
-      font-size: 0.9rem;
-      border: 1px solid var(--neon-cyan);
+    #nebula-canvas {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 1;
+      cursor: crosshair;
     }
 
     /* Achievements & Publications */
@@ -104,9 +96,7 @@
     #publications h2 {
       font-size: 2.5rem;
       margin-left: 5.5rem;
-      color: var(--neon-cyan);
-      text-shadow: 0 0 5px var(--neon-cyan);
-      font-family: 'Orbitron', sans-serif;
+      color: var(--text-color);
       margin-bottom: 2rem;
     }
 
@@ -115,9 +105,10 @@
       padding: 1.5rem;
       margin-bottom: 1rem;
       border-radius: 10px;
-      border-left: 3px solid var(--neon-pink);
+      border-left: 4px solid var(--accent-teal);
       margin-left: 5.5rem;
       margin-right: 5.5rem;
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
     }
 
     .list-item h3 {
@@ -134,7 +125,7 @@
       #skills,
       #achievements,
       #publications {
-        padding: 5rem 1.5rem;
+        padding: 4rem 1rem;
         text-align: center;
       }
 
@@ -149,11 +140,105 @@
         margin-right: 0;
       }
     }
+    
+    /* Background Glow / Blobs */
+    .bg-blob {
+      position: fixed;
+      border-radius: 50%;
+      pointer-events: none;
+      filter: blur(100px);
+      z-index: -1;
+      opacity: 0.15;
+    }
+    .bg-blob-1 {
+      width: 400px;
+      height: 400px;
+      background: #00d9ff;
+      top: -100px;
+      left: -100px;
+    }
+    .bg-blob-2 {
+      width: 500px;
+      height: 500px;
+      background: #a78bfa;
+      bottom: -150px;
+      right: -100px;
+    }
+    
+    /* Coding Profiles CSS */
+    .profiles-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2rem;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+    .profile-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 16px;
+      padding: 2rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+    .profile-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 30px rgba(0, 217, 255, 0.1);
+      border-color: var(--accent-teal);
+    }
+    .profile-card img {
+      width: 64px;
+      height: 64px;
+      margin-bottom: 1rem;
+    }
+    .profile-card h3 {
+      font-size: 1.5rem;
+      margin-bottom: 0.5rem;
+      color: var(--text-color);
+    }
+    .profile-card p {
+      font-size: 0.95rem;
+      color: var(--text-muted);
+      margin-bottom: 1.5rem;
+    }
+    .profile-badge {
+      background: rgba(0, 217, 255, 0.1);
+      color: var(--accent-teal);
+      padding: 0.4rem 1rem;
+      border-radius: 20px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      margin-bottom: 1.5rem;
+      font-family: "DM Mono", monospace;
+    }
+    .profile-btn {
+      margin-top: auto;
+      padding: 0.8rem 2rem;
+      background: transparent;
+      border: 1px solid var(--text-color);
+      border-radius: 30px;
+      color: var(--text-color);
+      text-decoration: none;
+      font-weight: 600;
+      transition: all 0.3s ease;
+    }
+    .profile-card:hover .profile-btn {
+      background: var(--text-color);
+      color: var(--bg-color);
+    }
   </style>
 </head>
 
 <body>
-  <div id="canvas-container"></div>
+  <!-- Background Aesthetics -->
+  <div class="bg-blob bg-blob-1"></div>
+  <div class="bg-blob bg-blob-2"></div>
+  
   <header id="header">
     <p>
       <a id="logo" href="#home">
@@ -173,13 +258,10 @@
 
         <ul id="menu" role="menu">
           <li><a href="#home"><i class="fa fa-home" aria-hidden="true"></i> Home<span></span></a></li>
-          <li><a href="#about"><i class="fa fa-user" aria-hidden="true"></i> About<span></span></a></li>
-          <li><a href="#experience"><i class="fa fa-briefcase" aria-hidden="true"></i> Experience<span></span></a></li>
-          <li><a href="#skills"><i class="fa fa-code" aria-hidden="true"></i> Skills<span></span></a></li>
-          <li><a href="#projects"><i class="fa fa-archive" aria-hidden="true"></i> Projects<span></span></a></li>
-          <li><a href="#education"><i class="fa fa-university" aria-hidden="true"></i> Education<span></span></a></li>
-          <li><a href="#Certificates"><i class="fa fa-certificate" aria-hidden="true"></i> Certificates<span></span></a></li>
-          <li><a href="#contact"><i class="fa fa-envelope" aria-hidden="true"></i> Contact<span></span></a></li>
+          <li><a href="#about"><i class="fa fa-bullseye" aria-hidden="true"></i> Mission<span></span></a></li>
+          <li><a href="#experience"><i class="fa fa-cogs" aria-hidden="true"></i> Solutions<span></span></a></li>
+          <li><a href="#projects"><i class="fa fa-archive" aria-hidden="true"></i> Featured Work<span></span></a></li>
+          <li><a href="#contact"><i class="fa fa-envelope" aria-hidden="true"></i> Let's Work<span></span></a></li>
         </ul>
         <span id="border-animation"></span>
       </nav>
@@ -187,100 +269,74 @@
 
    <main>
       <!-- HOME SECTION -->
-      <section id="home">
-        <div id="div-left">
-          <p>Hi, I'm</p>
+      <section id="home" style="display: flex; align-items: center; justify-content: center; min-height: 100vh;">
+        <div id="div-center" style="text-align: center; max-width: 800px; padding: 0 20px; z-index: 10;">
+          <p class="hero-sub">Hello! I'm</p>
           <h1>Kunal Avghade</h1>
-          <p>Software Engineer</p>
-          <p style="font-size: 1.2rem; color: var(--neon-pink);">I am <span id="ityped" style="color: var(--neon-cyan);"></span></p>
+          <p class="hero-role">Full-Stack &amp; ML Developer</p>
+          <p class="hero-desc">Building intelligent systems at the intersection of full-stack development and machine learning. Empowering businesses with scalable architectures and a future-driven approach.</p>
           <div id="div-social">
-            <a href="https://www.linkedin.com/in/kunalavghade/" target="_blank" rel="noopener noreferrer"><img src="img/linkedin icon.png" alt="Linkedin" /> Linkedin<span></span><span></span><span></span><span></span></a>
-            <a href="https://github.com/kunalavghade/" target="_blank" rel="noopener noreferrer"><img src="img/github incon.png" alt="GitHub" /> GitHub<span></span><span></span><span></span><span></span></a>
+            <a href="#projects">View My Work</a>
+            <a href="#contact">Get In Touch</a>
           </div>
-        </div>
-        <div id="div-right">
-          <img id="img-gif" src="img/astronaulta.gif" alt="Astronaut Gif" />
         </div>
       </section>
       
-      <!-- ABOUT SECTION -->
-      <section id="about" data-anime="section-scroll">
-        <div id="about-photo">
-          <img src="img/kunal Image.png" alt="Photo: Kunal" />
-        </div>
-        <div id="about-text">
-          <h1>About Me</h1>
-          <p>Full Stack Software Engineer with 2.5+ years of experience in frontend and backend frameworks, along with exposure to DevOps and AI/ML technologies.</p>
-          <p>Based in Pune, Maharashtra, India.</p>
-          <div id="about-button">
-            <div class="buttons">
-              <a href="img/RESUME.pdf" download="RESUME"><img src="img/download.gif" alt="download" /> Resume</a>
-            </div>
-            <div class="buttons">
-              <a href="mailto:kunalavghade77@gmail.com"><img id="email-photo" src="img/email.gif" alt="Email" />Email</a>
-            </div>
+      <!-- ABOUT SECTION (MISSION) -->
+      <section id="about" data-anime="section-scroll" style="display: flex; justify-content: center; align-items: center; padding: 4rem 20px; background: transparent; border: none; position: relative;">
+        <div id="about-text" style="text-align: center; max-width: 900px; width: 100%;">
+          <h1 style="font-size: 2.5rem; margin-bottom: 2rem;">My Mission</h1>
+          <p style="font-size: 1.15rem; margin-bottom: 1.5rem;">I am a Software Engineer with a proven track record of building high-scale distributed systems and cloud-native architectures. I specialize in Java/Spring Boot and Python/FastAPI.</p>
+          <p style="font-size: 1.15rem; margin-bottom: 2.5rem;">Whether it is managing terabyte-scale data migrations or crafting complex AI agent workflows, my goal is to deliver fault-tolerant, high-performance platforms that drive real business value.</p>
+          <div id="about-button" style="justify-content: center; display: flex; gap: 20px;">
+            <a href="https://www.linkedin.com/in/kunalavghade/" target="_blank" rel="noopener noreferrer" style="color: var(--accent-indigo); font-weight: 600; text-decoration: none; font-size: 1.1rem;"><i class="fab fa-linkedin" style="margin-right: 8px;"></i> LinkedIn</a>
+            <a href="https://github.com/kunalavghade/" target="_blank" rel="noopener noreferrer" style="color: var(--text-color); font-weight: 600; text-decoration: none; font-size: 1.1rem;"><i class="fab fa-github" style="margin-right: 8px;"></i> GitHub</a>
           </div>
         </div>
       </section>
 
-      <!-- EXPERIENCE SECTION -->
-      <section id="experience" data-anime="section-scroll">
-        <h2>Experience</h2>
-        <div id="experience-div">
-          <div id="experience-left">
-            <ul>
-              <li class="experience-click" onclick="showExperience('calfus')">Calfus .Inc</li>
-              <li onclick="showExperience('infi')">InfiIoT Tech</li>
-            </ul>
-          </div>
-          <div id="experience-right">
-            <div id="calfus" class="company-active">
-              <h3>Associate Software Engineer</h3>
-              <p>2023/07 - present</p>
-              <h4>Calfus .Inc, Pune, India</h4>
-              <p>Worked across the full-stack domain, handling diverse technologies and delivering high-quality code across multiple projects. Actively participated in daily scrums, sprints, and collaborated on Jira tickets.</p>
-              <br>
-              <p><strong>Key Projects:</strong></p>
-              
-              <div style="margin-top: 1rem;">
-                  <p style="color: var(--neon-cyan); margin-bottom: 0.5rem;"><strong>Netapp Data Migrator</strong></p>
-                  <p style="font-size: 0.9rem; color: #aaa; margin-bottom: 0.5rem;"><em>Tech Stack: Spring Boot, NestJS, NextJS, RabbitMQ, gRPC, REST, Temporal, Redis, PostgreSQL.</em></p>
-                  <ul style="list-style: disc; padding-left: 20px; color: var(--text-color); font-size: 0.95rem;">
-                      <li>Delivered a fully tested solution capable of migrating terabytes of data in hours for NAS storage systems, supporting NFS/SMB protocols.</li>
-                      <li>Designed a server to manage a high load using gRPC and API calls, built storage discovery and migration agents with multithreading and multi-service work distribution.</li>
-                      <li>Built an optimized backend for faster and reliable data transfer, implemented authentication and authorization using Keycloak and Auth0.</li>
-                      <li>Optimized migration and discovery speed throughout the development cycles.</li>
-                  </ul>
-              </div>
-
-              <div style="margin-top: 1.5rem;">
-                  <p style="color: var(--neon-cyan); margin-bottom: 0.5rem;"><strong>Asurint.com</strong></p>
-                  <p style="font-size: 0.9rem; color: #aaa; margin-bottom: 0.5rem;"><em>Tech Stack: Spring Boot, React, NestJS, ArgoCD, GCP, Jenkins, GraphQL, PostgreSQL, Kafka.</em></p>
-                  <ul style="list-style: disc; padding-left: 20px; color: var(--text-color); font-size: 0.95rem;">
-                      <li>Project consisting of Background verification and report generation.</li>
-                      <li>Developed over six epics to support criminal record checks, SSN searches, education verifications, order management, and report generation workflows.</li>
-                      <li>Built microservices enabling seamless data processing and inter-service communication, with multi-vendor Api integrations in the system.</li>
-                      <li>Leveraged GCP for infrastructure, ArgoCD for continuous delivery, and Jenkins for CI/CD automation, ensuring efficient deployment and scalability.</li>
-                  </ul>
-              </div>
-
-              <div style="margin-top: 1.5rem;">
-                  <p style="color: var(--neon-cyan); margin-bottom: 0.5rem;"><strong>Money Viewer</strong></p>
-                  <p style="font-size: 0.9rem; color: #aaa; margin-bottom: 0.5rem;"><em>Tech Stack: Python, FastAPI, React, PostgreSQL, AWS.</em></p>
-                  <ul style="list-style: disc; padding-left: 20px; color: var(--text-color); font-size: 0.95rem;">
-                      <li>Contributed as part of the product development team to create an enterprise solution for visualizing cash flows through graphical representations and Al-driven insights.</li>
-                      <li>Built well-tested and documented APIs and web interfaces to display financial data, efficiently gathering data from files for real-time insights.</li>
-                      <li>Developed a scheduling service to automate weekly data updates in the database, ensuring accuracy and currency of information.</li>
-                  </ul>
-              </div>
+      <!-- DIGITAL SOLUTIONS (SERVICES) SECTION -->
+      <section id="experience" data-anime="section-scroll" style="background: var(--bg-color); padding: 4rem 2rem; text-align: center; position: relative;">
+        <h2 style="font-size: 3rem; margin-bottom: 1rem; margin-left: 0;">Our Digital Solutions</h2>
+        <p style="max-width: 700px; margin: 0 auto 4rem auto; font-size: 1.15rem; color: var(--text-muted);">We provide cutting-edge technology solutions that drive growth, efficiency, and customer satisfaction.</p>
+        
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; max-width: 1200px; margin: 0 auto; text-align: left;">
+          
+          <!-- Service 1 -->
+          <div style="background: var(--card-bg); padding: 2.5rem; border-radius: 16px; border: 1px solid var(--border-color); box-shadow: var(--shadow-light); transition: all 0.3s ease;" onmouseover="this.style.transform='translateY(-5px)'; this.style.borderColor='var(--accent-teal)'" onmouseout="this.style.transform='translateY(0)'; this.style.borderColor='var(--border-color)'">
+            <h3 style="font-size: 1.5rem; color: var(--accent-indigo); margin-bottom: 1rem;">Full-Stack Web Apps</h3>
+            <p style="color: var(--text-muted); margin-bottom: 1.5rem;">Building scalable, high-performance web applications with modern architectures and responsive designs.</p>
+            <div style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
+              <span style="background: rgba(45, 212, 191, 0.1); color: var(--accent-teal); padding: 0.3rem 0.8rem; border-radius: 20px; font-size: 0.85rem; font-weight: 600;">Java/Spring Boot</span>
+              <span style="background: rgba(45, 212, 191, 0.1); color: var(--accent-teal); padding: 0.3rem 0.8rem; border-radius: 20px; font-size: 0.85rem; font-weight: 600;">React/NextJS</span>
+              <span style="background: rgba(45, 212, 191, 0.1); color: var(--accent-teal); padding: 0.3rem 0.8rem; border-radius: 20px; font-size: 0.85rem; font-weight: 600;">PostgreSQL</span>
             </div>
-            <div id="infi" class="company-none" style="display: none;">
-              <h3>Python Django Developer Intern</h3>
-              <p>Jan 2023 - Current</p>
-              <h4>InfiIoT Technology Pvt. Ltd.</h4>
-              <p> - Hands Experience on Backend and frontend Technologies.</p>
-              <p> - Responsible Developing, Testing and Integration of Rest APIs into backend, communications with IoT controllers.</p>
-              <p> - Operated on Backend Technologies Django, REST, Database, loggers and HTML, CSS,JS, Ajax as fronted.</p>
+          </div>
+
+          <!-- Service 2 -->
+          <div style="background: var(--card-bg); padding: 2.5rem; border-radius: 16px; border: 1px solid var(--border-color); box-shadow: var(--shadow-light); transition: all 0.3s ease;" onmouseover="this.style.transform='translateY(-5px)'; this.style.borderColor='var(--accent-teal)'" onmouseout="this.style.transform='translateY(0)'; this.style.borderColor='var(--border-color)'">
+            <h3 style="font-size: 1.5rem; color: var(--accent-indigo); margin-bottom: 1rem;">AI & Machine Learning</h3>
+            <p style="color: var(--text-muted); margin-bottom: 1.5rem;">Delivering smart, AI-driven insights, LLM agents, and automated workflows to improve decision-making.</p>
+            <div style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
+              <span style="background: rgba(45, 212, 191, 0.1); color: var(--accent-teal); padding: 0.3rem 0.8rem; border-radius: 20px; font-size: 0.85rem; font-weight: 600;">Python</span>
+              <span style="background: rgba(45, 212, 191, 0.1); color: var(--accent-teal); padding: 0.3rem 0.8rem; border-radius: 20px; font-size: 0.85rem; font-weight: 600;">Temporal</span>
+              <span style="background: rgba(45, 212, 191, 0.1); color: var(--accent-teal); padding: 0.3rem 0.8rem; border-radius: 20px; font-size: 0.85rem; font-weight: 600;">FastAPI</span>
+            </div>
+          </div>
+
+          <!-- Service 3 -->
+          <div style="background: var(--card-bg); padding: 2.5rem; border-radius: 16px; border: 1px solid var(--border-color); box-shadow: var(--shadow-light); transition: all 0.3s ease;" onmouseover="this.style.transform='translateY(-5px)'; this.style.borderColor='var(--accent-teal)'" onmouseout="this.style.transform='translateY(0)'; this.style.borderColor='var(--border-color)'">
+            <h3 style="font-size: 1.5rem; color: var(--accent-indigo); margin-bottom: 1rem;">Cloud & DevOps</h3>
+            <p style="color: var(--text-muted); margin-bottom: 1.5rem;">Optimized cloud architectures with automated CI/CD pipelines ensuring maximum scalability and performance.</p>
+            <div style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
+              <span style="background: rgba(45, 212, 191, 0.1); color: var(--accent-teal); padding: 0.3rem 0.8rem; border-radius: 20px; font-size: 0.85rem; font-weight: 600;">AWS</span>
+              <span style="background: rgba(45, 212, 191, 0.1); color: var(--accent-teal); padding: 0.3rem 0.8rem; border-radius: 20px; font-size: 0.85rem; font-weight: 600;">Docker/K8s</span>
+              <span style="background: rgba(45, 212, 191, 0.1); color: var(--accent-teal); padding: 0.3rem 0.8rem; border-radius: 20px; font-size: 0.85rem; font-weight: 600;">RabbitMQ/gRPC</span>
+            </div>
+          </div>
+
+        </div>
+      </section>
             </div>
           </div>
         </div>
@@ -294,63 +350,245 @@
         </script>
       </section>
 
-      <!-- SKILLS SECTION (NEW) -->
+      <!-- SKILLS SECTION (Nebula Simulation) -->
       <section id="skills" data-anime="section-scroll">
-          <h2>Skills</h2>
-          <div class="skills-container">
-              <div class="skill-category" data-anime="section-scroll">
-                  <h3>Languages</h3>
-                  <ul class="skill-list">
-                      <li class="skill-item">JavaScript</li>
-                      <li class="skill-item">Java</li>
-                      <li class="skill-item">Python</li>
-                      <li class="skill-item">C++</li>
-                  </ul>
-              </div>
-              <div class="skill-category" data-anime="section-scroll">
-                  <h3>Backend</h3>
-                  <ul class="skill-list">
-                      <li class="skill-item">NestJS</li>
-                      <li class="skill-item">Spring</li>
-                      <li class="skill-item">Spring Boot</li>
-                      <li class="skill-item">FastAPI</li>
-                  </ul>
-              </div>
-              <div class="skill-category" data-anime="section-scroll">
-                  <h3>Frontend</h3>
-                  <ul class="skill-list">
-                      <li class="skill-item">ReactJS</li>
-                      <li class="skill-item">NextJS</li>
-                      <li class="skill-item">HTML</li>
-                      <li class="skill-item">CSS</li>
-                  </ul>
-              </div>
-              <div class="skill-category" data-anime="section-scroll">
-                  <h3>Tools & Platforms</h3>
-                  <ul class="skill-list">
-                      <li class="skill-item">Kafka</li>
-                      <li class="skill-item">RabbitMQ</li>
-                      <li class="skill-item">AWS</li>
-                      <li class="skill-item">GCP</li>
-                      <li class="skill-item">Jenkins</li>
-                      <li class="skill-item">Docker</li>
-                      <li class="skill-item">Temporal</li>
-                  </ul>
-              </div>
-              <div class="skill-category" data-anime="section-scroll">
-                  <h3>Database</h3>
-                  <ul class="skill-list">
-                      <li class="skill-item">PostgreSQL</li>
-                      <li class="skill-item">Redis</li>
-                      <li class="skill-item">MongoDB</li>
-                  </ul>
-              </div>
+          <style>
+            #skills { 
+                position: relative; 
+                display: flex;
+                flex-direction: column;
+                min-height: 100vh; 
+                background: 
+                  radial-gradient(circle at 15% 40%, rgba(106, 13, 173, 0.5), transparent 40%),
+                  radial-gradient(circle at 85% 30%, rgba(0, 217, 255, 0.4), transparent 50%),
+                  radial-gradient(circle at 50% 80%, rgba(255, 20, 147, 0.3), transparent 50%),
+                  #050510;
+            }
+            #skills::after {
+                content: '';
+                position: absolute;
+                bottom: 0; left: 0; right: 0;
+                height: 200px;
+                background: linear-gradient(to bottom, transparent, var(--bg-color, #0a0a0a));
+                pointer-events: none;
+                z-index: 5;
+            }
+            #nebula-container { width: 100%; flex: 1; min-height: 600px; position: relative; overflow: hidden; }
+            #nebula-container::before {
+                content: "";
+                position: absolute;
+                top: 0; left: 0; right: 0; bottom: 0;
+                background-image: 
+                  radial-gradient(2px 2px at 20px 30px, #eee, rgba(0,0,0,0)),
+                  radial-gradient(2px 2px at 40px 70px, #fff, rgba(0,0,0,0)),
+                  radial-gradient(2px 2px at 50px 160px, #ddd, rgba(0,0,0,0)),
+                  radial-gradient(2px 2px at 90px 40px, #fff, rgba(0,0,0,0)),
+                  radial-gradient(2px 2px at 130px 80px, #fff, rgba(0,0,0,0)),
+                  radial-gradient(2px 2px at 160px 120px, #ddd, rgba(0,0,0,0));
+                background-repeat: repeat;
+                background-size: 200px 200px;
+                opacity: 0.3;
+                z-index: 0;
+                pointer-events: none;
+            }
+            #nebula-canvas { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; pointer-events: none; }
+            #skills-title-overlay { position: absolute; top: 5%; left: 50%; transform: translateX(-50%); text-align: center; z-index: 10; pointer-events: none; width: 100%; }
+            #skills-title-overlay h2 { font-size: 3rem; margin-bottom: 0.5rem; color: #fff; text-shadow: 0 0 20px rgba(0, 217, 255, 0.5); }
+            #skills-title-overlay p { font-size: 1.1rem; color: rgba(255,255,255,0.7); max-width: 600px; margin: 0 auto; }
+            
+            .skill-node {
+               position: absolute;
+               z-index: 5;
+               display: flex;
+               align-items: center;
+               justify-content: center;
+               border-radius: 50%;
+               background: rgba(255,255,255,0.05);
+               border: 1px solid rgba(255,255,255,0.1);
+               color: rgba(255,255,255,0.8);
+               cursor: pointer;
+               transition: transform 0.3s ease, background 0.3s ease, border-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
+               animation: floatStar infinite ease-in-out alternate;
+            }
+            .skill-node.cat-node {
+               width: 50px; height: 50px; font-size: 24px;
+               box-shadow: 0 0 15px rgba(255,255,255,0.1);
+            }
+            .skill-node.sub-node {
+               width: 35px; height: 35px; font-size: 16px;
+            }
+            .skill-node:hover {
+               background: rgba(255, 255, 255, 0.2);
+               border-color: #00d9ff;
+               color: #00d9ff;
+               box-shadow: 0 0 30px rgba(0, 217, 255, 0.6);
+               z-index: 20;
+            }
+            .skill-node .tooltip {
+               position: absolute;
+               bottom: -30px;
+               left: 50%;
+               transform: translateX(-50%);
+               background: transparent;
+               border: none;
+               color: #fff;
+               font-family: 'DM Sans', sans-serif;
+               font-size: 15px;
+               font-weight: 700;
+               white-space: nowrap;
+               pointer-events: none;
+               text-shadow: 0 2px 5px rgba(0,0,0,0.9), 0 0 12px rgba(0,217,255,0.8);
+               z-index: 10;
+            }
+            
+            .skill-node.active-node {
+               background: rgba(0, 217, 255, 0.3);
+               border-color: #00d9ff;
+               color: #ffffff;
+               box-shadow: 0 0 30px rgba(0, 217, 255, 0.8);
+            }
+            
+            .skills-popup {
+               position: absolute;
+               top: -30px;
+               width: 170px;
+               background: rgba(5, 5, 16, 0.95);
+               backdrop-filter: blur(10px);
+               border: 1px solid rgba(0, 217, 255, 0.4);
+               border-radius: 10px;
+               padding: 1rem;
+               color: #fff;
+               display: flex;
+               flex-direction: column;
+               gap: 0.6rem;
+               opacity: 0;
+               visibility: hidden;
+               transition: opacity 0.3s, transform 0.3s;
+               pointer-events: none;
+               box-shadow: 0 10px 25px rgba(0, 0, 0, 0.6), 0 0 15px rgba(0, 217, 255, 0.2);
+               transform: translateY(10px);
+               z-index: 50;
+            }
+            .skill-node:hover .skills-popup,
+            .skill-node.active-node .skills-popup {
+               opacity: 1;
+               visibility: visible;
+               pointer-events: auto;
+               transform: translateY(0);
+            }
+            .popup-skill-item {
+               display: flex;
+               align-items: center;
+               gap: 0.8rem;
+               font-family: 'DM Sans', sans-serif;
+               font-size: 0.95rem;
+               padding: 0.4rem 0.6rem;
+               border-radius: 6px;
+               transition: background 0.2s ease, transform 0.2s ease, color 0.2s ease;
+               cursor: pointer;
+            }
+            .popup-skill-item:hover {
+               background: rgba(0, 217, 255, 0.15);
+               transform: translateX(5px);
+               color: #00d9ff;
+            }
+            
+            @keyframes floatStar {
+               0% { transform: translateY(0px) translateX(0px); }
+               100% { transform: translateY(-20px) translateX(10px); }
+            }
+            
+            /* Realistic Animated Nebula Fog Layers */
+            .nebula-fog {
+                position: absolute;
+                border-radius: 50%;
+                filter: blur(90px);
+                opacity: 0.6;
+                pointer-events: none;
+                z-index: 0;
+            }
+            .fog-1 {
+                width: 800px; height: 800px;
+                background: rgba(106, 13, 173, 0.7);
+                top: -200px; left: -200px;
+                animation: fogDrift 25s infinite alternate ease-in-out;
+            }
+            .fog-2 {
+                width: 900px; height: 900px;
+                background: rgba(0, 217, 255, 0.5);
+                bottom: -300px; right: -200px;
+                animation: fogDrift 30s infinite alternate ease-in-out -5s;
+            }
+            .fog-3 {
+                width: 700px; height: 700px;
+                background: rgba(255, 20, 147, 0.5);
+                top: 40%; left: 20%;
+                animation: fogDrift 22s infinite alternate ease-in-out -10s;
+            }
+            .fog-4 {
+                width: 600px; height: 600px;
+                background: rgba(20, 100, 255, 0.5);
+                top: 20%; right: 20%;
+                animation: fogDrift 28s infinite alternate ease-in-out -15s;
+            }
+            @keyframes fogDrift {
+                0% { transform: translate(0, 0) scale(1) rotate(0deg); }
+                100% { transform: translate(150px, 80px) scale(1.3) rotate(15deg); }
+            }
+          </style>
+          <div id="nebula-container">
+            <!-- Animated Fog Backgrounds -->
+            <div class="nebula-fog fog-1"></div>
+            <div class="nebula-fog fog-2"></div>
+            <div class="nebula-fog fog-3"></div>
+            <div class="nebula-fog fog-4"></div>
+            
+            <div id="skills-title-overlay">
+              <h2>Skill Ecosystem</h2>
+              <p>A connected constellation of my technological stack. <strong>Hover or click a star</strong> to explore.</p>
+            </div>
+            <canvas id="nebula-canvas"></canvas>
           </div>
+      </section>
+
+      <!-- CODING PROFILES SECTION -->
+      <section id="profiles" data-anime="section-scroll" style="background: var(--bg-color); padding: 4rem 2rem; text-align: center; position: relative;">
+        <h2 style="font-size: 3rem; margin-bottom: 1rem; color: var(--text-color);">Competitive Programming</h2>
+        <p style="max-width: 600px; margin: 0 auto 3rem auto; font-size: 1.1rem; color: var(--text-muted);">Strong algorithmic foundations with a proven track record of solving complex problems.</p>
+        
+        <div class="profiles-grid">
+          <!-- LeetCode Card -->
+          <div class="profile-card">
+            <!-- Simple SVG placeholder for LeetCode logo (since we don't have the image file) -->
+            <svg width="64" height="64" viewBox="0 0 24 24" fill="none" style="margin-bottom: 1rem;">
+              <path d="M13.483 0a1.374 1.374 0 0 0-.961.438L7.116 6.226l-3.854 4.126a5.266 5.266 0 0 0-1.209 2.104 5.35 5.35 0 0 0-.125 2.53 5.38 5.38 0 0 0 1.533 2.807l7.509 8.038a1.272 1.272 0 0 0 1.936 0 1.33 1.33 0 0 0 0-1.875l-7.508-8.038a2.7 2.7 0 0 1-.806-1.466 2.66 2.66 0 0 1 .054-1.284 2.624 2.624 0 0 1 .58-1.04l8.092-8.227a1.082 1.082 0 0 0 0-1.587A1.306 1.306 0 0 0 13.483 0zm-2.846 6.814a1.18 1.18 0 0 0-.828.342l-2.077 2.065a1.18 1.18 0 0 0 0 1.674 1.18 1.18 0 0 0 1.655 0l2.077-2.065a1.18 1.18 0 0 0 0-1.674 1.18 1.18 0 0 0-.827-.342zm2.083 4.254c-.305 0-.61.114-.827.34l-5.32 5.289a1.18 1.18 0 0 0 0 1.674 1.18 1.18 0 0 0 1.656 0l5.319-5.289a1.18 1.18 0 0 0 0-1.674 1.18 1.18 0 0 0-.828-.34zm3.328 4.244a1.18 1.18 0 0 0-.828.34l-8.647 8.595a1.18 1.18 0 0 0 0 1.674 1.18 1.18 0 0 0 1.655 0l8.648-8.595a1.18 1.18 0 0 0 0-1.674 1.18 1.18 0 0 0-.828-.34zm.001-4.244a1.18 1.18 0 0 0-.828.34l-5.32 5.289a1.18 1.18 0 0 0 0 1.674 1.18 1.18 0 0 0 1.656 0l5.32-5.289a1.18 1.18 0 0 0 0-1.674 1.18 1.18 0 0 0-.828-.34z" fill="#FFA116"/>
+            </svg>
+            <h3>LeetCode</h3>
+            <p>@akunal</p>
+            <div class="profile-badge">Top 7% Worldwide</div>
+            <a href="https://leetcode.com/u/akunal/" target="_blank" class="profile-btn">View Profile</a>
+          </div>
+
+          <!-- Codeforces Card -->
+          <div class="profile-card">
+            <!-- Simple SVG placeholder for Codeforces logo -->
+            <svg width="64" height="64" viewBox="0 0 24 24" fill="none" style="margin-bottom: 1rem;">
+              <rect x="15" y="4" width="4" height="16" fill="#F44336"/>
+              <rect x="10" y="10" width="4" height="10" fill="#2196F3"/>
+              <rect x="5" y="14" width="4" height="6" fill="#FFC107"/>
+            </svg>
+            <h3>Codeforces</h3>
+            <p>@Kunalavghade</p>
+            <div class="profile-badge">Specialist / Pupil</div>
+            <a href="https://codeforces.com/profile/Kunalavghade" target="_blank" class="profile-btn">View Profile</a>
+          </div>
+        </div>
       </section>
 
       <!-- PROJECTS SECTION -->
       <section class="projects" id="projects" data-anime="section-scroll">
-        <h1 class="heading"> Projects |<span> Repositories</span> </h1>
+        <h1 class="heading" style="text-align: center; margin-bottom: 0.5rem; color: var(--text-color);"> Featured Work </h1>
+        <p style="text-align: center; max-width: 600px; margin: 0 auto 3rem auto; color: var(--text-muted); font-size: 1.1rem;">Beautiful UI, robust architectures, and AI-powered solutions that drive business growth. Let the work do the talking.</p>
         <div class="box-container">
           
           <div class="box" data-anime="section-scroll">
@@ -568,18 +806,196 @@
 
       <!-- CONTACT SECTION -->
       <section id="contact" style="padding: 4rem 5rem; text-align: center; background: var(--card-bg); margin-top: 2rem;">
-          <h2 style="font-family: 'Orbitron', sans-serif; color: var(--neon-cyan); margin-bottom: 2rem;">Contact Me</h2>
-          <p style="color: var(--text-color); font-size: 1.2rem; margin-bottom: 2rem;">Feel free to reach out for collaborations or just a friendly hello!</p>
+          <h2 style="font-weight: 700; color: var(--text-color); margin-bottom: 2rem;">Contact Me</h2>
+          <p style="color: var(--text-muted); font-size: 1.2rem; margin-bottom: 2rem;">Feel free to reach out for collaborations or just a friendly hello!</p>
           <div style="display: flex; justify-content: center; gap: 2rem;">
-              <a href="mailto:kunalavghade77@gmail.com" style="color: var(--neon-pink); font-size: 2rem;"><i class="fas fa-envelope"></i></a>
-              <a href="https://www.linkedin.com/in/kunalavghade/" target="_blank" style="color: var(--neon-cyan); font-size: 2rem;"><i class="fab fa-linkedin"></i></a>
-              <a href="https://github.com/kunalavghade/" target="_blank" style="color: var(--text-color); font-size: 2rem;"><i class="fab fa-github"></i></a>
+              <a href="mailto:kunalavghade77@gmail.com" style="color: var(--accent-indigo); font-size: 2rem; transition: 0.3s;" onmouseover="this.style.color='var(--accent-teal)'" onmouseout="this.style.color='var(--accent-indigo)'"><i class="fas fa-envelope"></i></a>
+              <a href="https://www.linkedin.com/in/kunalavghade/" target="_blank" style="color: var(--accent-indigo); font-size: 2rem; transition: 0.3s;" onmouseover="this.style.color='var(--accent-teal)'" onmouseout="this.style.color='var(--accent-indigo)'"><i class="fab fa-linkedin"></i></a>
+              <a href="https://github.com/kunalavghade/" target="_blank" style="color: var(--accent-indigo); font-size: 2rem; transition: 0.3s;" onmouseover="this.style.color='var(--accent-teal)'" onmouseout="this.style.color='var(--accent-indigo)'"><i class="fab fa-github"></i></a>
           </div>
-          <p style="margin-top: 2rem; color: #666;">&copy; 2025 Kunal Avghade. All rights reserved.</p>
+          <p style="margin-top: 2rem; color: var(--text-muted);">&copy; 2026 Kunal Avghade. All rights reserved.</p>
       </section>
 
       </main>
-	</body>
+	  <!-- NEBULA GALAXY JS ENGINE -->
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const canvas = document.getElementById("nebula-canvas");
+      if(!canvas) return;
+      const ctx = canvas.getContext("2d");
+
+      const categories = [
+        { id: 'lang', label: 'Languages', color: '#ffffff', icon: '\uf121', font: '"Font Awesome 5 Free"' },
+        { id: 'frame', label: 'Frameworks', color: '#ffffff', icon: '\uf1b3', font: '"Font Awesome 5 Free"' },
+        { id: 'back', label: 'Backend & Sys', color: '#ffffff', icon: '\uf233', font: '"Font Awesome 5 Free"' },
+        { id: 'cloud', label: 'Cloud & DevOps', color: '#ffffff', icon: '\uf0c2', font: '"Font Awesome 5 Free"' },
+        { id: 'db', label: 'Databases', color: '#ffffff', icon: '\uf1c0', font: '"Font Awesome 5 Free"' },
+        { id: 'msg', label: 'Messaging', color: '#ffffff', icon: '\uf1e0', font: '"Font Awesome 5 Free"' },
+        { id: 'core', label: 'Core Concepts', color: '#ffffff', icon: '\uf0eb', font: '"Font Awesome 5 Free"' },
+        { id: 'ai', label: 'AI & Advanced', color: '#ffffff', icon: '\uf544', font: '"Font Awesome 5 Free"' }
+      ];
+
+      const skills = [
+        { label: 'Java', cat: 'lang', icon: '\uf4e4', font: '"Font Awesome 5 Brands"' },
+        { label: 'Python', cat: 'lang', icon: '\uf3e2', font: '"Font Awesome 5 Brands"' },
+        { label: 'C/C++', cat: 'lang', icon: '\uf121', font: '"Font Awesome 5 Free"' },
+        { label: 'JavaScript', cat: 'lang', icon: '\uf3b8', font: '"Font Awesome 5 Brands"' },
+        { label: 'HTML', cat: 'lang', icon: '\uf13b', font: '"Font Awesome 5 Brands"' },
+        { label: 'CSS', cat: 'lang', icon: '\uf13c', font: '"Font Awesome 5 Brands"' },
+        
+        { label: 'Spring Boot', cat: 'frame', icon: '\uf06c', font: '"Font Awesome 5 Free"' },
+        { label: 'NestJS', cat: 'frame', icon: '\uf1b2', font: '"Font Awesome 5 Free"' },
+        { label: 'Django', cat: 'frame', icon: '\uf0ac', font: '"Font Awesome 5 Free"' },
+        { label: 'FastAPI', cat: 'frame', icon: '\uf0e7', font: '"Font Awesome 5 Free"' },
+        { label: 'Angular', cat: 'frame', icon: '\uf420', font: '"Font Awesome 5 Brands"' },
+        { label: 'React', cat: 'frame', icon: '\uf41b', font: '"Font Awesome 5 Brands"' },
+        
+        { label: 'Microservices', cat: 'back', icon: '\uf0e8', font: '"Font Awesome 5 Free"' },
+        { label: 'Dist. Systems', cat: 'back', icon: '\uf1e0', font: '"Font Awesome 5 Free"' },
+        { label: 'REST', cat: 'back', icon: '\uf0c1', font: '"Font Awesome 5 Free"' },
+        { label: 'gRPC', cat: 'back', icon: '\uf362', font: '"Font Awesome 5 Free"' },
+        
+        { label: 'AWS', cat: 'cloud', icon: '\uf375', font: '"Font Awesome 5 Brands"' },
+        { label: 'GCP', cat: 'cloud', icon: '\uf1a0', font: '"Font Awesome 5 Brands"' },
+        { label: 'Docker', cat: 'cloud', icon: '\uf395', font: '"Font Awesome 5 Brands"' },
+        { label: 'Kubernetes', cat: 'cloud', icon: '\uf135', font: '"Font Awesome 5 Free"' },
+        { label: 'CI/CD', cat: 'cloud', icon: '\uf021', font: '"Font Awesome 5 Free"' },
+        
+        { label: 'PostgreSQL', cat: 'db', icon: '\uf1c0', font: '"Font Awesome 5 Free"' },
+        { label: 'MySQL', cat: 'db', icon: '\uf1c0', font: '"Font Awesome 5 Free"' },
+        { label: 'Redis', cat: 'db', icon: '\uf1c0', font: '"Font Awesome 5 Free"' },
+        
+        { label: 'Kafka', cat: 'msg', icon: '\uf1e0', font: '"Font Awesome 5 Free"' },
+        { label: 'RabbitMQ', cat: 'msg', icon: '\uf0e7', font: '"Font Awesome 5 Free"' },
+        { label: 'Temporal', cat: 'msg', icon: '\uf017', font: '"Font Awesome 5 Free"' },
+        
+        { label: 'DSA', cat: 'core', icon: '\uf0e8', font: '"Font Awesome 5 Free"' },
+        { label: 'OOP', cat: 'core', icon: '\uf1b2', font: '"Font Awesome 5 Free"' },
+        { label: 'System Design', cat: 'core', icon: '\uf085', font: '"Font Awesome 5 Free"' },
+        
+        { label: 'Machine Learning', cat: 'ai', icon: '\uf5dc', font: '"Font Awesome 5 Free"' },
+        { label: 'Deep Learning', cat: 'ai', icon: '\uf5dc', font: '"Font Awesome 5 Free"' },
+        { label: 'LLMs', cat: 'ai', icon: '\uf086', font: '"Font Awesome 5 Free"' },
+        { label: 'AI Agents', cat: 'ai', icon: '\uf544', font: '"Font Awesome 5 Free"' },
+        { label: 'RAG Systems', cat: 'ai', icon: '\uf002', font: '"Font Awesome 5 Free"' }
+      ];
+
+      const container = document.getElementById("nebula-container");
+      
+      let domNodes = [];
+      
+      // Hardcoded coordinates to form a majestic, organic constellation (Orion style)
+      const orionCoords = [
+         { x: 25, y: 35 }, // Shoulder left
+         { x: 75, y: 35 }, // Shoulder right
+         { x: 50, y: 45 }, // Core / Heart
+         { x: 35, y: 60 }, // Belt left
+         { x: 65, y: 60 }, // Belt right
+         { x: 20, y: 85 }, // Foot left
+         { x: 80, y: 85 }, // Foot right
+         { x: 50, y: 75 }  // Tail / Center bottom
+      ];
+      
+      // Clear container (except canvas and overlay)
+      const existingNodes = container.querySelectorAll('.skill-node');
+      existingNodes.forEach(n => n.remove());
+
+      categories.forEach((c, i) => {
+         // Organic scatter
+         let coord = orionCoords[i];
+         c.left = coord.x + (Math.random() * 4 - 2); 
+         c.top = coord.y + (Math.random() * 4 - 2);
+         
+         let el = document.createElement('div');
+         el.className = 'skill-node cat-node';
+         el.style.left = `calc(${c.left}% - 30px)`;
+         el.style.top = `calc(${c.top}% - 30px)`;
+         el.style.animationDuration = (3 + Math.random() * 3) + 's';
+         
+         let fw = c.font.includes('Brands') ? '400' : '900';
+         let innerHTML = `<span style='font-family: ${c.font}; font-weight: ${fw}'>${c.icon}</span><span class="tooltip">${c.label}</span>`;
+         
+         // Generate popup html
+         let isRightSide = c.left > 50;
+         let popupStyle = isRightSide ? `right: 65px; left: auto;` : `left: 65px; right: auto;`;
+         let popupHTML = `<div class="skills-popup" style="${popupStyle}">
+                            <div style="font-weight: 700; color: #00d9ff; margin-bottom: 0.3rem; text-align: left; font-size: 1.05rem;">${c.label}</div>`;
+         
+         let children = skills.filter(s => s.cat === c.id);
+         children.forEach(s => {
+             let sfw = s.font.includes('Brands') ? '400' : '900';
+             popupHTML += `<div class="popup-skill-item"><span style='font-family: ${s.font}; font-weight: ${sfw}; color: rgba(255,255,255,0.8); width: 20px; text-align: center;'>${s.icon}</span> <span>${s.label}</span></div>`;
+         });
+         popupHTML += `</div>`;
+         
+         el.innerHTML = innerHTML + popupHTML;
+         container.appendChild(el);
+         
+         c.element = el;
+         domNodes.push(c);
+         
+         el.addEventListener('click', () => {
+            if(el.classList.contains('active-node')) {
+                el.classList.remove('active-node');
+            } else {
+                container.querySelectorAll('.cat-node').forEach(n => n.classList.remove('active-node'));
+                el.classList.add('active-node');
+            }
+         });
+      });
+
+      function resize() {
+        canvas.width = container.offsetWidth;
+        canvas.height = container.offsetHeight;
+      }
+      window.addEventListener("resize", resize);
+      resize();
+
+      function renderLines() {
+         ctx.clearRect(0, 0, canvas.width, canvas.height);
+         
+         const rectContainer = container.getBoundingClientRect();
+         ctx.lineWidth = 1.5;
+         
+         // Define explicit connections for the majestic Orion-style constellation
+         const edges = [
+            [0, 2], [1, 2], [0, 3], [1, 4], 
+            [3, 2], [4, 2], [3, 5], [4, 6], 
+            [5, 7], [6, 7], [2, 7], [3, 4]
+         ];
+         
+         edges.forEach(([i, j]) => {
+            let c1 = categories[i];
+            let c2 = categories[j];
+            
+            let rect1 = c1.element.getBoundingClientRect();
+            let rect2 = c2.element.getBoundingClientRect();
+            
+            let x1 = rect1.left + rect1.width/2 - rectContainer.left;
+            let y1 = rect1.top + rect1.height/2 - rectContainer.top;
+            let x2 = rect2.left + rect2.width/2 - rectContainer.left;
+            let y2 = rect2.top + rect2.height/2 - rectContainer.top;
+            
+            // Constellation Lines
+            let grad = ctx.createLinearGradient(x1, y1, x2, y2);
+            grad.addColorStop(0, 'rgba(0, 217, 255, 0.05)');
+            grad.addColorStop(0.5, 'rgba(255, 255, 255, 0.15)');
+            grad.addColorStop(1, 'rgba(0, 217, 255, 0.05)');
+            
+            ctx.beginPath();
+            ctx.moveTo(x1, y1);
+            ctx.lineTo(x2, y2);
+            ctx.strokeStyle = grad;
+            ctx.stroke();
+         });
+         
+         requestAnimationFrame(renderLines);
+      }
+      
+      renderLines();
+    });
+  </script>
+</body>
   <script src="js/menu-mobile.js"></script>
   <script src="js/menu-education.js"></script>
   <script src="js/fadeInSection.js"></script>
@@ -587,7 +1003,7 @@
   <script src="https://unpkg.com/ityped@0.0.10"></script>
   <script>
     window.ityped.init(document.querySelector('#ityped'), {
-      strings: ['Software Engineer', 'Full Stack Developer', 'Problem Solver', 'Tech Enthusiast'],
+      strings: ['Full Stack Software Engineer', 'Java/Spring Boot Expert', 'Python/FastAPI Developer', 'Cloud Native Enthusiast'],
       typeSpeed: 100,
       backSpeed: 50,
       loop: true
