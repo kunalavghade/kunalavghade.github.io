@@ -722,49 +722,46 @@
 
       <!-- EDUCATION SECTION -->
       <section id="education" data-anime="section-scroll">
-        <h2>Education</h2>
-        <div id="education-div">
-          <div id="education-left">
-            <ul>
-              <li class="education-click" onclick="showEducation('btech')">Bachelors</li>
-              <li onclick="showEducation('diploma')">Diploma</li>
-              <li onclick="showEducation('ssc')">SSC</li>
-            </ul>
-          </div>
-          <div id="education-right">
-            <div id="btech" class="collage-active">
-              <h3>B. Tech, Electronics and Telecommunication</h3>
-              <p>2020 - 2023</p>
-              <h4>Vishwakarma Institute of Information Technology, Pune</h4>
+        <h2 style="text-align: center; margin-bottom: 3rem;">Education Journey</h2>
+        <div class="timeline-container">
+          <div class="timeline">
+            <!-- Item 1 -->
+            <div class="timeline-item">
+              <div class="timeline-dot"></div>
+              <div class="timeline-content">
+                <div class="timeline-date">2020 - 2023</div>
+                <h3>B. Tech, Electronics and Telecommunication</h3>
+                <h4>Vishwakarma Institute of Information Technology, Pune</h4>
+              </div>
             </div>
-            <div id="diploma" class="collage-none" style="display: none;">
-              <h3>Diploma, Electronics and Telecommunication</h3>
-              <p>Jun 2017 - Jul 2020</p>
-              <h4>Government Polytechnic, Pune</h4>
-              <p>Skill Achived</p>
-              <p>- Languages: C, Embedded C, ASM</p>
-              <p>- Controllers: 8051, PIC18, ARM</p>
-              <p>- Electronics: Basic, Digital, Power</p>
-              <p>- Other: PCB design, Industrial Elctronics</p>
+            
+            <!-- Item 2 -->
+            <div class="timeline-item">
+              <div class="timeline-dot"></div>
+              <div class="timeline-content">
+                <div class="timeline-date">Jun 2017 - Jul 2020</div>
+                <h3>Diploma, Electronics and Telecommunication</h3>
+                <h4>Government Polytechnic, Pune</h4>
+                <div class="timeline-skills-container">
+                  <span class="timeline-skill-chip">C / Embedded C</span>
+                  <span class="timeline-skill-chip">8051 / PIC18 / ARM</span>
+                  <span class="timeline-skill-chip">PCB Design</span>
+                  <span class="timeline-skill-chip">Industrial Electronics</span>
+                </div>
+              </div>
             </div>
-            <div id="ssc" class="collage-none" style="display: none;">
-              <h3>Secondary School Certificate</h3>
-              <p>March 2017</p>
-              <h4>Camp Education High school, Pune</h4>
-              <p>- 10th std completed.</p>
-              <p>- soft skills</p>
-              <p>- Pre-vocational Traning</p>
+            
+            <!-- Item 3 -->
+            <div class="timeline-item">
+              <div class="timeline-dot"></div>
+              <div class="timeline-content">
+                <div class="timeline-date">March 2017</div>
+                <h3>Secondary School Certificate</h3>
+                <h4>Camp Education High school, Pune</h4>
+              </div>
             </div>
           </div>
         </div>
-        <script>
-          function showEducation(id) {
-            document.querySelectorAll('#education-right > div').forEach(div => div.style.display = 'none');
-            document.getElementById(id).style.display = 'block';
-            document.querySelectorAll('#education-left li').forEach(li => li.classList.remove('education-click'));
-            event.target.classList.add('education-click');
-          }
-        </script>
       </section>
 
       <!-- ACHIEVEMENTS SECTION (NEW) -->

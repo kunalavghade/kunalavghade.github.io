@@ -1,153 +1,158 @@
 #education {
-  background: var(--bg-color);
+  background: radial-gradient(circle at 10% 90%, rgba(106, 13, 173, 0.1), transparent 40%),
+              radial-gradient(circle at 90% 10%, rgba(0, 217, 255, 0.1), transparent 40%),
+              var(--bg-color);
   padding: 4rem 2rem;
+  position: relative;
+  overflow: hidden;
 }
 
 #education h2 {
-  font-size: 2.5rem;
-  margin-left: 5.5rem;
+  font-size: 3rem;
   color: var(--text-color);
   font-weight: 700;
+  text-shadow: 0 0 15px rgba(0, 217, 255, 0.3);
+}
+
+.timeline-container {
+  max-width: 800px;
+  margin: 0 auto;
+  position: relative;
+}
+
+.timeline {
+  position: relative;
+  border-left: 2px solid rgba(0, 217, 255, 0.3);
+  box-shadow: -2px 0 15px rgba(0, 217, 255, 0.15); /* Glowing beam */
+  padding-left: 3rem;
+  margin-left: 1rem;
+}
+
+.timeline-item {
+  position: relative;
   margin-bottom: 2rem;
 }
 
-#education-div {
-  display: flex;
-  justify-content: center;
-  gap: 7rem;
-  margin-top: 3rem;
+.timeline-item:last-child {
+  margin-bottom: 0;
 }
 
-#education-left {
-  width: 15rem;
-  height: 100%;
-  border-left: 3px solid var(--border-color);
+.timeline-dot {
+  position: absolute;
+  left: -3.65rem; /* center on border */
+  top: 5px;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: #050510;
+  border: 3px solid var(--accent-teal);
+  box-shadow: 0 0 15px rgba(0, 217, 255, 0.8), 0 0 30px rgba(0, 217, 255, 0.4);
+  z-index: 2;
+  transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.4s ease, background 0.4s ease;
+  animation: pulseStar 3s infinite alternate;
 }
 
-#education-left ul {
-  list-style: none;
+@keyframes pulseStar {
+  0% { box-shadow: 0 0 10px rgba(0, 217, 255, 0.4), 0 0 20px rgba(0, 217, 255, 0.1); }
+  100% { box-shadow: 0 0 20px rgba(0, 217, 255, 1), 0 0 40px rgba(0, 217, 255, 0.5); }
 }
 
-#education-left li {
-  padding: 0.9rem 0;
-  padding-left: 10px;
-  width: 100%;
-  cursor: pointer;
-  color: var(--text-muted);
-  transition: all 0.3s ease;
-  font-weight: 500;
+.timeline-item:hover .timeline-dot {
+  transform: scale(1.4);
+  box-shadow: 0 0 30px rgba(0, 217, 255, 1), 0 0 60px rgba(0, 217, 255, 0.8);
+  background: var(--accent-teal);
+  animation: none;
 }
 
-#education-left li:hover {
-  background: rgba(45, 212, 191, 0.05);
-  color: var(--accent-teal);
-  padding-left: 20px;
-}
-
-.education-click {
-  background: rgba(45, 212, 191, 0.1);
-  color: var(--accent-teal) !important;
-  border-left: 3px solid var(--accent-teal);
-  margin-left: -3px;
-}
-
-#education-right {
-  width: 43rem;
-  height: 20rem;
-  background: var(--card-bg);
-  padding: 2rem 2.5rem;
+.timeline-content {
+  background: rgba(15, 15, 25, 0.6);
+  border: 1px solid rgba(0, 217, 255, 0.15);
+  backdrop-filter: blur(12px);
   border-radius: 12px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
-  border: 1px solid var(--border-color);
+  padding: 1.5rem 2rem;
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.4s ease, border-color 0.4s ease;
 }
 
-#education-right h3 {
-  font-size: 1.5rem;
-  color: var(--accent-indigo);
-  margin-bottom: 0.5rem;
+.timeline-content::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; width: 100%; height: 100%;
+  background: radial-gradient(circle at top right, rgba(0, 217, 255, 0.1), transparent 60%);
+  pointer-events: none;
+  z-index: 0;
 }
 
-#education-right p {
-  color: var(--text-muted);
-  font-size: 0.95rem;
+.timeline-content > * {
+  position: relative;
+  z-index: 1;
 }
 
-#education-right h4 {
+.timeline-content:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.6), 0 0 30px rgba(0, 217, 255, 0.2);
+  border-color: rgba(0, 217, 255, 0.5);
+}
+
+.timeline-date {
   color: var(--accent-teal);
-  margin: 1rem 0 2rem;
-  font-weight: 500;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  font-size: 0.95rem;
+  letter-spacing: 1px;
 }
 
-.collage-none {
-  display: none;
+.timeline-content h3 {
+  font-size: 1.35rem;
+  color: var(--text-color);
+  margin-bottom: 0.3rem;
 }
 
-.collage-active {
-  display: block;
+.timeline-content h4 {
+  color: var(--text-muted);
+  font-size: 1rem;
+  font-weight: 400;
+  margin-bottom: 0.8rem;
 }
 
-.text-focus-in {
-  -webkit-animation: text-focus-in 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
-  animation: text-focus-in 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+.timeline-skills-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 0.8rem;
 }
 
-@-webkit-keyframes text-focus-in {
-  0% {
-    -webkit-filter: blur(8px);
-    filter: blur(8px);
-    opacity: 0;
-  }
-  100% {
-    -webkit-filter: blur(0px);
-    filter: blur(0px);
-    opacity: 1;
-  }
+.timeline-skill-chip {
+  background: rgba(0, 217, 255, 0.05);
+  border: 1px solid rgba(0, 217, 255, 0.2);
+  color: var(--text-secondary);
+  padding: 0.3rem 0.8rem;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  transition: background 0.3s ease, border-color 0.3s ease, color 0.3s ease;
 }
 
-@keyframes text-focus-in {
-  0% {
-    -webkit-filter: blur(8px);
-    filter: blur(8px);
-    opacity: 0;
-  }
-  100% {
-    -webkit-filter: blur(0px);
-    filter: blur(0px);
-    opacity: 1;
-  }
+.timeline-skill-chip:hover {
+  background: rgba(0, 217, 255, 0.15);
+  border-color: var(--accent-teal);
+  color: #fff;
 }
 
-@media (max-width: 879px) {
+@media (max-width: 768px) {
   #education {
-    padding: 4rem 1rem;
-    text-align: center;
+    padding: 4rem 1.5rem;
   }
-
-  #education h2 {
-    margin: auto;
+  .timeline {
+    padding-left: 2rem;
   }
-
-  #education-div {
-    display: block;
+  .timeline-dot {
+    left: -2.65rem;
   }
-
-  #education-left {
-    margin: auto;
-    border-left: none;
-    margin-bottom: 3rem;
-  }
-
-  .education-click {
-    border-left: none;
-    border-bottom: 2px solid var(--accent-teal);
-    background: rgba(45, 212, 191, 0.1);
-    margin-left: 0;
-  }
-
-  #education-right {
-    width: auto;
-    margin-top: 3rem;
+  .timeline-content {
     padding: 1.5rem;
-    height: auto;
+  }
+  .timeline-content h3 {
+    font-size: 1.3rem;
   }
 }
